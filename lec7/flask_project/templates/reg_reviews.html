@@ -1,4 +1,98 @@
-{% extends "index.html" %}
-{% block section %}
-    리뷰 작성 화면입니다.
-{% endblock section %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ewha Market 리뷰 등록</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar" style="background-color: #00462A;">
+        <!-- 로고가 중앙에 배치됨 -->
+        <div class="navbar__logo">
+            <a href="/">Ewha Market</a>
+        </div>
+
+        <!-- 로그인 메뉴가 우측에 배치됨 -->
+        <div class="login_button">
+            <ul class="login_bar">
+                {% if userid %}
+                <li><a class="login_menu" href="/logout">로그아웃</a></li>
+                <li><a class="login_menu" href="/mypage">마이페이지</a></li>
+                {% else %}
+                <li><a class="login_menu" href="/loginpage">로그인</a></li>
+                {% endif %}
+            </ul>
+        </div>
+
+        <!-- 네비게이션 메뉴가 좌측에 배치됨 -->
+        <ul class="navbar__menu">
+            <li><a class="menu" href="/list">상품 목록</a></li>
+            <li><a class="menu" href="/review">리뷰 목록</a></li>
+            <li><a class="menu" href="/reg_items">상품 올리기</a></li>
+            <li><a class="menu active" href="/reg_reviews">리뷰 작성하기</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1>리뷰 등록</h1>
+
+        <form id="reviewForm">
+            <div class="form-group">
+                <label for="product">상품명</label>
+                <input type="text" id="product" name="product" placeholder="상품명을 입력하세요">
+            </div>
+
+            <div class="form-group">
+                <label for="payment">결제 수단</label>
+                <select id="payment" name="payment">
+                    <option value="card">카드</option>
+                    <option value="bank_transfer">계좌 이체</option>
+                    <option value="cash">현금</option>
+                    <option value="point">포인트</option>
+                    <option value="other">기타</option>
+                </select>
+            </div>
+
+            <div class="form-group rating-section">
+                <label for="rating">만족도</label>
+                <div id="rating" class="rating">
+                    <span class="star" data-value="1">&#9733;</span>
+                    <span class="star" data-value="2">&#9733;</span>
+                    <span class="star" data-value="3">&#9733;</span>
+                    <span class="star" data-value="4">&#9733;</span>
+                    <span class="star" data-value="5">&#9733;</span>
+                </div>
+                <span id="rating-text">별점을 선택해주세요.</span>
+            </div>
+
+            <div class="form-group">
+                <label for="title">제목</label>
+                <input type="text" id="title" name="title" placeholder="ex) 최고의 책">
+            </div>
+
+            <div class="form-group">
+                <label for="content">내용 작성</label>
+                <textarea id="content" name="content" placeholder="ex) 추천합니다!"></textarea>
+            </div>
+
+            <div class="form-group file-upload-section">
+                <label for="file">사진/동영상 첨부</label>
+                <div class="file-buttons">
+                    <button type="button" onclick="document.getElementById('file').click();">파일 첨부</button>
+                    <button type="button">사진 찍기</button>
+                </div>
+                <input type="file" id="file" name="file" style="display: none;" onchange="showFileName()">
+                <span id="file-name">Review Image upload : </span>
+            </div>
+
+            <div class="form-group buttons">
+                <button type="button" class="cancel-btn" onclick="cancelReview()">작성 취소</button>
+                <button type="submit" class="submit-btn">글 게시</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
