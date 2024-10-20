@@ -12,33 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <style>
-        .navbar__logo {
-            padding-left: 50px;
-            display: inline-block;
-
-        }
-        .login_button{
-            float: right;
-            display: inline-block;
-        }
-        
-        .login_menu {
-            color:white;
-            padding: 20px;
-        }
-
-        li {
-            display: inline-block;
-        }
-        .menu {
-            color:white;
-            padding: 20px;
-            font-size:large;
-        }
-
-
-    </style>
+    
     <script src="{{ url_for('static', filename='main.js') }}" defer></script>
 </head>
 <body>
@@ -58,11 +32,11 @@
 </ul>
 </div>
 <br><br>
-<ul class="navbar__menu">
-    <li><a class="menu" href="/list">상품 목록</a></li>
-    <li><a class="menu" href="/review">리뷰 목록</a></li>
-    <li><a class="menu" href="/reg_items">상품 올리기</a></li>
-    <li><a class="menu" href="/reg_reviews">리뷰 작성하기</a></li>
+<ul class="navbar__menu"> 
+    <a class="itemList" href="/list">상품 목록</a>
+    <a class="reviewList" href="/review">리뷰 목록</a>
+    <a class="regItems" href="/reg_items">상품 올리기</a>
+    <a class="regReviews" href="/reg_reviews">리뷰 작성하기</a>
 </ul><br>
 <a href="#" class="navbar__toogleBtn">
 <i class="fas fa-bars"></i>
