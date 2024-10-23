@@ -14,9 +14,15 @@
     font-size: 30px !important;
     font-weight: bold;
     text-align: center;
-    margin: 20px;
+    padding-top: 20px;
+    position: relative;
+    left: 40%;
+    display: inline-block;
 }
-
+.login_button {
+    float:right;
+    display: inline-block;
+}
 /* 네비게이션 바 */
 .navbar__menu {
     display: grid;
@@ -24,16 +30,15 @@
     grid-gap: 10px;
     border: none;
     margin: 1px;
-    padding: 10px;
-    height: 50px;
+    padding-bottom: 10px;
   }
   .itemList, .reviewList, .regItems, .regReviews {
     font-family: Tahoma, sans-serif;
-    font-size: 30px;
+    font-size: 25px;
     font-weight: bold;
     text-align: center;
     color:#ffffff;
-    height: 50px;
+    height: 20px;
     background-color: none;
     border: none;
   }
