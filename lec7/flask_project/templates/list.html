@@ -1,5 +1,9 @@
+
 {% extends "index.html" %}
 {% block section %}
+<head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='list_style.css') }}">
+</head>
 
     <!-- 네비게이션 바 아래 상품 분류 필터부터 구현 -->
     <div class="categories">
@@ -22,5 +26,5 @@
         <ul id="products"></ul>
     </main>
 
-    <script scr = "products.js"></script>
+    <script src="{{ url_for('static', filename='products.js') }}"></script>
 {% endblock section %}

@@ -1,0 +1,73 @@
+.categories{
+    text-align: center;
+}
+  
+.category_btn {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 17px;
+    text-align: center;
+
+    background-color: #ffffff;
+    border-width: 1.5px;
+    border-style: solid;
+    border-color:#006937;
+    border-radius: 7px;
+  
+    display: inline-block;
+    min-width: 200px;
+    min-height: 25px;
+  
+    margin: 15px 2px;
+    padding: 5px 15px;
+    cursor: pointer;
+}
+  
+.category_btn:focus {
+    
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 17px;
+   
+    
+    background-color: #006937;
+    color:#ffffff;
+    border-width: 1.5px;
+    border-style: solid;
+    border-color:#006937;
+    border-radius: 7px;
+  
+    display: inline-block;
+    min-width: 200px;
+    min-height: 25px;
+  
+    margin: 15px 2px;
+    padding: 5px 15px;
+}
+
+/* 상품 목록 스타일링 */
+#products {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 가로 5 x 세로 2 */
+    grid-gap: 20px; /* 아이템 간 간격 */
+    padding: 0;
+    list-style: none;
+    justify-items: center; /* 아이템 중앙 정렬 */
+}
+
+.product_item {
+    border: none; 
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    background-color: #f9f9f9; /* 배경색 추가 */
+}
+
+.product_item img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 20px;
+}
+
+.product_item h3 {
+    font-size: 16px;
+    margin: 10px 0 0 0;
+}

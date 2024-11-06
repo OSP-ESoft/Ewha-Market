@@ -1,5 +1,7 @@
-from flask import Flask, render_template, request, flash
+from flask import Flask, render_template, request, flash, jsonify
 import sys
+import json
+
 application = Flask(__name__)
 application.config["SECRET_KEY"] = "ABCD"
 
@@ -83,6 +85,17 @@ def reg_item_submit_post():
 
     return render_template("submit_item_result.html", data=data,  img_path="static/images/{}".format(image_file.filename))
 '''
+
+@application.route("/products")
+def get_products():
+    try:
+        with open("static/products.json", encoding="utf-8") as f:
+            products = json.load(f)
+        return jsonify(products)
+    except Exception as e:
+        print("Error loading products:", e)
+        return jsonify({"error": "Failed to load products"}), 500
+
 
 if __name__ == "__main__":
     application.run(host='0.0.0.0', debug=True)

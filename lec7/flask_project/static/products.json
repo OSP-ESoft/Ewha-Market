@@ -1,101 +1,54 @@
 [
-
-
     {
         "category": "책",
         "title": "명품 자바 에센셜",
-        "imageUrl": "lec7\\flask_project\\static\\images\\명품자바에센셜표지.jpg"
-        
-    }
-
+        "imageUrl": "lec7/flask_project/static/images/명품자바에센셜표지.jpg",
+        "date" : "2024.09.10"
+    },
     {
         "category": "책",
         "title": "C언어로 쉽게 풀어쓴 자료구조",
-        "imageUrl": "lec7\\flask_project\\static\\images\\자료구조.jpg"
-        
-    }
-
+        "imageUrl": "lec7/flask_project/static/images/자료구조.jpg"
+    },
     {
         "category": "책",
         "title": "자료구조와 함께 배우는 알고리즘 입문",
-        "imageUrl": "lec7\\flask_project\\static\\images\\알고리즘입문.jpg"
-        
-    }
-
+        "imageUrl": "lec7/flask_project/static/images/알고리즘입문.jpg"
+    },
     {
         "category": "책",
         "title": "쉽게 배우는 파이썬",
-        "imageUrl": "lec7\\flask_project\\static\\images\\쉽게배우는파이썬.jpg"
-        
-    }
-
-
+        "imageUrl": "lec7/flask_project/static/images/쉽게배우는파이썬.jpg"
+    },
     {
         "category": "책",
         "title": "기독교와 세계 교재",
-        "imageUrl": "lec7\\flask_project\\static\\images\\기독교와세계.jpg"
-        
-    }
-
-
+        "imageUrl": "lec7/flask_project/static/images/기독교와세계.jpg"
+    },
     {
         "category": "책",
         "title": "대학물리학 10판",
-        "imageUrl": "lec7\\flask_project\\static\\images\\대학물리학10판.jpg"
-        
-    }
-
-
+        "imageUrl": "lec7/flask_project/static/images/대학물리학10판.jpg"
+    },
     {
         "category": "책",
         "title": "기본일본어 교재",
-        "imageUrl": "lec7\\flask_project\\static\\images\\기본일본어.jpg"
-        
-    }
-
+        "imageUrl": "lec7/flask_project/static/images/기본일본어.jpg"
+    },
     {
         "category": "책",
         "title": "통합적 사고와 글쓰기 교재",
-        "imageUrl": "lec7\\flask_project\\static\\images\\통글.jpg"
-        
-    }
-
-
+        "imageUrl": "lec7/flask_project/static/images/통글.jpg"
+    },
     {
         "category": "책",
-        "title": "Campbell Biology in Focus Global Edithion",
-        "imageUrl": "lec7\\flask_project\\static\\images\\Campbell_Biology_in_Focus_Global.jpg"
-        
-    }
-
+        "title": "Campbell Biology in Focus Global Edition",
+        "imageUrl": "lec7/flask_project/static/images/Campbell_Biology_in_Focus_Global.jpg"
+    },
     {
         "category": "책",
         "title": "통합적 사고와 글쓰기 교재",
-        "imageUrl": "lec7\\flask_project\\static\\images\\기본일본어.jpg"
-        
+        "imageUrl": "lec7/flask_project/static/images/기본일본어.jpg"
     }
-
-    {
-        "category": "생활용품",
-        "title": "usb c타입 충전기",
-        "imageUrl": ""
-        
-    }
-
-    {
-        "category": "이화 굿즈",
-        "title": "기본 학잠",
-        "imageUrl": ""
-        
-    }
-
-    {
-        "category": "기타",
-        "title": "영화표 양도",
-        "imageUrl": ""
-        
-    }
-
-
-
+    
 ]
