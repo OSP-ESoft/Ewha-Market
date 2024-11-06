@@ -44,43 +44,34 @@ a {
   padding: 12px 20px;
 }
 .navbar__logo {
-  font-family: Tahoma, sans-serif !important;
-  color: #ffffff;
-  font-size: 40px !important;
-  font-weight: bold;
-  text-align: center;
-  margin: 0;
-  padding: 0;
+    font-family: Tahoma, sans-serif !important;
+    color:#ffffff;
+    font-size: 30px !important;
+    font-weight: bold;
+    text-align: center;
+    margin: 20px;
 }
-
 
 /* 네비게이션 바 */
 .navbar__menu {
-  background-color: #006937;
-  display: flex;
-  justify-content: center;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  height: 50px;
-}
-.navbar__menu li{
-  padding: 8px 30px;
-}
-
-.itemList,
-.reviewList,
-.regItems,
-.regReviews {
-  font-family: Tahoma, sans-serif;
-  font-size: 30px;
-  font-weight: bold;
-  text-align: center;
-  color: #ffffff;
-  height: 50px;
-  background-color: none;
-  border: none;
-}
+    display: grid;
+    grid-template-columns: repeat(4, minmax(100px, auto));
+    grid-gap: 10px;
+    border: none;
+    margin: 1px;
+    padding: 10px;
+    height: 50px;
+  }
+  .itemList, .reviewList, .regItems, .regReviews {
+    font-family: Tahoma, sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    color:#ffffff;
+    height: 50px;
+    background-color: none;
+    border: none;
+  }
 
 /* 로그인버튼 */
 .login_bar {
@@ -98,48 +89,10 @@ a {
   text-decoration-line: none;
   transition: background-color 0.3s ease; /* 호버 효과를 위한 부드러운 전환 */
 }
-.login_button{
-  margin-right: 20px;
-}
 
-.login_menu:hover {
-    background-color: #037a46; /* 호버 시 배경 색상 */
- }
-
- /* 상품목록 페이지 디자인 */
-
- .categories{
-  text-align: center;
- }
-
-.category_btn {
-  font-size: 30px;
-  background-color: #ffffff;
-  color:#000000;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 8px;
-  border-width: 1px;
-  border-color:#006937;
-  border-radius: 8px;
-
-  display: inline-block;
+/* .login_menu:hover {
+    background-color: #037a46; 호버 시 배경 색상
+ } */
 
 
-  width: 80px;
-  height: 30px;
-
-  margin: 5px;
-  padding: 10px 15px;
-  cursor: pointer;
-}
-
-.category_btn:focus {
-  background-color: #006937;
-  color:#ffffff;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 8px;
-  text-align: center;
-  border-width:1px;
-  border-color:#006937;
-  border-radius:8%;
-}
+  

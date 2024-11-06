@@ -16,33 +16,28 @@
     <script src="{{ url_for('static', filename='main.js') }}" defer></script>
 </head>
 <body>
-<nav class="navbar">
-    <div class="navbar__header">
-        <div class="navbar__center">
-            <div class="navbar__logo">
-                <a href="/">Ewha Market</a>
-            </div>
-            <ul class="navbar__menu"> 
-                <li><a class="itemList" href="/list">상품 목록</a></li>
-                <li><a class="reviewList" href="/review">리뷰 목록</a></li>
-                <li><a class="regItems" href="/reg_items">상품 올리기</a></li>
-                <li><a class="regReviews" href="/reg_reviews">리뷰 작성하기</a></li>
-            </ul>
+<nav class="navbar" style="background-color: #00462A;">
+<div class="navbar__logo">
+    <a href="/"><font size="20px" color="white">Ewha Market</a></font>
+</div>
 
-        </div>
-        <ul class="login_bar">
-             {%if userid%}
-                <li><a class="login_menu" href="/logout">로그아웃</a></li>
-                <li><a class="login_menu" href="/mypage">마이페이지</a></li>
-            {%else%}
-                <li><a class="login_menu" href="/loginpage">로그인</a></li>
-            {%endif%}
-        </ul>
-    </div>
-</nav>
-    
-
-</nav>
+<div class="login_button">
+<ul class="login_bar">
+    {%if userid%}
+    <li><a class="login_menu" href="/logout">로그아웃</a></li>
+    <li><a class="login_menu" href="/mypage">마이페이지</a></li>
+    {%else%}
+    <li><a class="login_menu" href="/loginpage">로그인</a></li>
+    {%endif%}
+</ul>
+</div>
+<br><br>
+<ul class="navbar__menu"> 
+    <a class="itemList" href="/list">상품 목록</a>
+    <a class="reviewList" href="/review">리뷰 목록</a>
+    <a class="regItems" href="/reg_items">상품 올리기</a>
+    <a class="regReviews" href="/reg_reviews">리뷰 작성하기</a>
+</ul><br>
 <a href="#" class="navbar__toogleBtn">
 <i class="fas fa-bars"></i>
 </a>
