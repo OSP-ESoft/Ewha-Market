@@ -1,4 +1,27 @@
 {% extends "index.html" %}
 {% block section %}
-    등록된 상품 리스트 조회 화면입니다.
+   
+    <!-- 네비게이션 바 아래 상품 분류 필터부터 구현 -->
+    <div id="categories">
+        <button class="category_btn" data-filter="daily_products" onclick="loadProducts('생활용품')">
+          생활용품
+        </button>
+        <button class="category_btn" data-filter="books" onclick="loadProducts('책')">
+          책
+        </button>
+        <button class="category_btn" data-filter="ewha_goods" onclick="loadProducts('이화 굿즈')">
+          이화 굿즈
+        </button>
+        <button class="category_btn" data-filter="etc" onclick="loadProducts('기타')">
+          기타
+        </button>
+    </div>
+
+
+    <main>
+        <ul id="products"></ul>
+    </main>
+
+    <script scr = "products.js"></script>
+
 {% endblock section %}
