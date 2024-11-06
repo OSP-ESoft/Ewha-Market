@@ -1,0 +1,115 @@
+body { 
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+/* 네비게이션 바 스타일 */
+.navbar {
+    background-color: #00462A;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navbar__logo {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.navbar__logo a {
+    color: white;
+    text-decoration: none;
+}
+
+.navbar__menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 30px;
+}
+
+.navbar__menu li {
+    display: inline;
+}
+
+.menu {
+    color: white;
+    font-size: 18px;
+    text-decoration: none;
+    padding: 10px;
+}
+
+.menu:hover, .menu.active {
+    text-decoration: underline;
+}
+
+/* 로그인 버튼 우측 배치 */
+.login_button {
+    display: flex;
+    align-items: center;
+}
+
+.login_menu {
+    color: white;
+    font-size: 18px;
+    text-decoration: none;
+    padding: 10px;
+}
+
+.login_menu:hover {
+    text-decoration: underline;
+}
+
+main {
+    padding: 40px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+form {
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+form div {
+    margin-bottom: 20px;
+}
+
+.username-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #3b5e3b;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+button:hover {
+    background-color: #2e4e2e;
+}
