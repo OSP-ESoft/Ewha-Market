@@ -1,0 +1,44 @@
+.categories{
+    text-align: center;
+}
+  
+.category_btn {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 17px;
+    text-align: center;
+
+    background-color: #ffffff;
+    border-width: 1.5px;
+    border-style: solid;
+    border-color:#006937;
+    border-radius: 7px;
+  
+    display: flex;
+    min-width: 200px;
+    min-height: 25px;
+  
+    margin: 2px 2px;
+    padding: 5px 15px;
+    cursor: pointer;
+}
+  
+.category_btn:focus {
+    
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 17px;
+   
+    
+    background-color: #006937;
+    color:#ffffff;
+    border-width: 1.5px;
+    border-style: solid;
+    border-color:#006937;
+    border-radius: 7px;
+  
+    display: inline-block;
+    min-width: 200px;
+    min-height: 25px;
+  
+    margin: 15px 2px;
+    padding: 5px 15px;
+}

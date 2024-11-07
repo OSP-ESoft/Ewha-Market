@@ -1,0 +1,15 @@
+
+{% extends "index.html" %}
+{% block section %}
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='list_style.css') }}">
+</head>
+<body>
+    <div id="product-detail">
+        <!-- 상품 상세 정보가 여기에 표시됨 -->
+    </div>
+
+    <script src="{{ url_for('static', filename='products.js') }}"></script>
+</body>
+{% endblock section %}
+

@@ -1,0 +1,76 @@
+{
+    "items" : [
+        {
+            "id": 1,
+            "category": "책",
+            "title": "명품 자바 에센셜",
+            "imageUrl": "static/images/명품자바에센셜표지.jpg",
+            "date" : "2024.09.10"
+        },
+        {
+            "id":2,
+            "category": "책",
+            "title": "C언어로 쉽게 풀어쓴 자료구조",
+            "imageUrl": "static/images/자료구조.jpg",
+            "date" : "2024.09.10"
+        },
+        {
+            "id":3,
+            "category": "책",
+            "title": "자료구조와 함께 배우는 알고리즘 입문",
+            "imageUrl": "static/images/알고리즘입문.jpg",
+            "date" : "2024.09.10"
+        },
+        {
+            "id":4,
+            "category": "책",
+            "title": "쉽게 배우는 파이썬",
+            "imageUrl": "static/images/쉽게배우는파이썬.jpg",
+            "date" : "2024.09.10"
+        },
+        {
+            "id":5,
+            "category": "책",
+            "title": "기독교와 세계 교재",
+            "imageUrl": "static/images/기독교와세계.jpg",
+            "date" : "2024.09.10"
+        },
+        {
+            "id":6,
+            "category": "책",
+            "title": "대학물리학 10판",
+            "imageUrl": "static/images/대학물리학10판.jpg",
+            "date" : "2024.09.10"
+        },
+        {
+            "id":7,
+            "category": "책",
+            "title": "기본일본어 교재",
+            "imageUrl": "static/images/기본일본어.jpg",
+            "date" : "2024.09.10"
+        },
+        {
+            "id":8,
+            "category": "책",
+            "title": "기초통계학 교재",
+            "imageUrl": "static/images/기초통계학.jpg",
+            "date" : "2024.09.10"
+        },
+        {
+            "id":9,
+            "category": "책",
+            "title": "Campbell Biology in Focus Global Edition",
+            "imageUrl": "static/images/Campbell_Biology_in_Focus_Global.jpg",
+            "date" : "2024.09.10"
+        },
+        {
+            "id":10,
+            "category": "책",
+            "title": "통합적 사고와 글쓰기 교재",
+            "imageUrl": "static/images/통글.jpg",
+            "date" : "2024.09.10"
+        }
+        
+    ]
+}
+    

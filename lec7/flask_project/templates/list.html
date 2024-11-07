@@ -3,28 +3,38 @@
 {% block section %}
 <head>
   <link rel="stylesheet" href="{{ url_for('static', filename='list_style.css') }}">
+  
 </head>
-
+<body>
     <!-- 네비게이션 바 아래 상품 분류 필터부터 구현 -->
-    <div class="categories">
-        <button class="category_btn" data-filter="daily_products" onclick="loadProducts('생활용품')">
+    <div class="category_btn">
+        <button class="daily_products" data-filter="daily_products" onclick="loadProducts('생활용품')">
           생활용품
         </button>
-        <button class="category_btn" data-filter="books" onclick="loadProducts('책')">
+        <button class="books" data-filter="books" onclick="loadProducts('책')">
           책
         </button>
-        <button class="category_btn" data-filter="ewha_goods" onclick="loadProducts('이화 굿즈')">
+        <button class="ewha_goods" data-filter="ewha_goods" onclick="loadProducts('이화 굿즈')">
           이화 굿즈
         </button>
-        <button class="category_btn" data-filter="etc" onclick="loadProducts('기타')">
+        <button class="etc" data-filter="etc" onclick="loadProducts('기타')">
           기타
         </button>
     </div>
 
 
-    <main>
-        <ul id="products"></ul>
-    </main>
+    
+    <div class="product-grid" id="products">
+      <!-- 상품들이 카드 형태로 추가될 영역 -->
+    </div>
+    
+    <!-- 페이지네이션 버튼 -->
+    <div class="pagination" id="pagination">
+      
+    </div>
+    
+    
 
     <script src="{{ url_for('static', filename='products.js') }}"></script>
+</body>
 {% endblock section %}
