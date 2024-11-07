@@ -9,23 +9,32 @@
 </head>
 
 <body>
-    <header>
-        <div class="navbar">
-            <div class="navbar__logo"><a href="#">Ewha Market</a></div>
-            <nav>
-                <ul class="navbar__menu">
-                    <li><a href="#" class="menu">상품 목록</a></li>
-                    <li><a href="#" class="menu">상품 등록</a></li>
-                    <li><a href="#" class="menu">리뷰 목록</a></li>
-                </ul>
-                <div class="login_button">
-                    <ul>
-                        <li><a href="#" class="login_menu">로그인</a></li>
-                    </ul>
-                </div>
-            </nav>
+    <nav class="navbar" style="background-color: #00462A;">
+        <!-- 로고가 중앙에 배치됨 -->
+        <div class="navbar__logo">
+            <a href="/">Ewha Market</a>
         </div>
-    </header><main>
+
+        <!-- 로그인 메뉴가 우측에 배치됨 -->
+        <div class="login_button">
+            <ul class="login_bar">
+                {% if userid %}
+                <li><a class="login_menu" href="/logout">로그아웃</a></li>
+                <li><a class="login_menu" href="/mypage">마이페이지</a></li>
+                {% else %}
+                <li><a class="login_menu" href="/loginpage">로그인</a></li>
+                {% endif %}
+            </ul>
+        </div>
+
+        <!-- 네비게이션 메뉴가 좌측에 배치됨 -->
+        <ul class="navbar__menu">
+            <li><a class="menu" href="/list">상품 목록</a></li>
+            <li><a class="menu" href="/review">리뷰 목록</a></li>
+            <li><a class="menu" href="/reg_items">상품 올리기</a></li>
+            <li><a class="menu active" href="/reg_reviews">리뷰 작성하기</a></li>
+        </ul>
+    </nav>
 <h2>회원가입</h2>
 <form id="signupForm">
     <div style="margin-bottom: 20px;"><label for="username" style="font-weight: bold;">아이디 *</label></div>
