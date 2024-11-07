@@ -108,3 +108,40 @@ function displayPagination(items) {
 document.addEventListener('DOMContentLoaded', () => {
   loadProducts(); // 기본적으로 모든 상품을 표시
 });
+
+
+
+/*상세페이지 관련 코드*/
+
+// URL 쿼리 파라미터에서 상품 ID 가져오기
+const urlParams = new URLSearchParams(window.location.search);
+const productId = urlParams.get('id'); // id 파라미터 값
+
+// 상품 데이터를 불러와서 상세 페이지에 표시하는 함수
+function loadProductDetail(productId) {
+  fetch('/static/products_data.json')
+      .then(response => response.json())
+      .then(data => {
+          const product = data.items.find(item => item.id == productId); // 해당 ID의 상품 찾기
+
+          if (product) {
+              document.getElementById('product-detail').innerHTML = `
+                  <h1>${product.title}</h1>
+                  <img src="/${product.imageUrl}" alt="${product.title}">
+                  <p><strong>날짜:</strong> ${product.date}</p>
+                  <p><strong>카테고리:</strong> ${product.category}</p>
+                  <p><strong>상세 설명:</strong> ${product.description}</p>
+              `;
+          } else {
+              document.getElementById('product-detail').innerHTML = `<p>상품을 찾을 수 없습니다.</p>`;
+          }
+      })
+      .catch(error => console.error("상품 상세 정보 불러오기 오류:", error));
+}
+
+// 페이지가 로드될 때 상품 상세 정보 로드
+if (productId) {
+  loadProductDetail(productId);
+} else {
+  document.getElementById('product-detail').innerHTML = `<p>상품 ID가 잘못되었습니다.</p>`;
+}
