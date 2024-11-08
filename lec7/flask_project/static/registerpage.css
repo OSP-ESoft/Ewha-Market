@@ -1,82 +1,116 @@
-body { 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; 
+    list-style: none;
+}
+    
+body {
     font-family: 'Arial', sans-serif;
     background-color: #f9f9f9;
-    margin: 0;
     padding: 0;
+    margin: 0;
 }
 
-/* 네비게이션 바 스타일 */
-.navbar {
-    background-color: #00462A;
-    padding: 15px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+a {
+    text-decoration: none;
+    color: inherit;
 }
-
-.navbar__logo {
-    font-size: 32px;
+#header {
     font-weight: bold;
-}
- 
-.navbar__logo a {
-    color: white;
-    text-decoration: none;
-}
-
-.navbar__menu {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    gap: 30px;
+    background-color: #006937;
+    padding: 20px 0;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
-.navbar__menu li {
-    display: inline;
-}
-
-.menu {
-    color: white;
-    font-size: 18px;
-    text-decoration: none;
-    padding: 10px;
-}
-
-.menu:hover, .menu.active {
-    text-decoration: underline;
-}
-
-/* 로그인 버튼 우측 배치 */
-.login_button {
-    display: flex;
-    align-items: center;
-}
-
-.login_menu {
-    color: white;
-    font-size: 18px;
-    text-decoration: none;
-    padding: 10px;
-}
-
-.login_menu:hover {
-    text-decoration: underline;
-}
-
-main {
-    padding: 40px;
-    max-width: 500px;
+#header .container {
+    width: 1120px; 
+    height: 189px;
     margin: 0 auto;
+
 }
 
+#header .logo a {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 68px;
+    color: #fff;
+}
+
+#header .utilarea {
+    position: absolute;
+    display: flex;
+    right: 5%;     
+    gap: 30px
+
+}
+
+#header .utilarea a {
+    font-size: 24px;
+    color: #fff;
+}
+
+#header .link {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    top: 160px;
+    width: 100%;
+}
+
+.link a {
+    position: relative;
+    color: #fff;
+    font-size: 30px;
+    padding: 20px 60px;
+    transition: background-color 0.3s ease;
+    border-radius: 8px;
+}
+
+.link a:hover {
+    color: #006937;
+    background-color: #fff;
+}
+
+
+@media screen and (max-width: 1000px){
+    #header .utilarea{
+        display: none;
+    }
+    
+}
+    
+/* 메인 섹션 스타일 추가 */
+main {
+    max-width: 500px;
+    margin: 100px auto; /* 페이지 상단에 여백을 주고 중앙에 배치 */
+    padding: 20px;
+    background-color: #ffffff; /* 배경색 추가 */
+    border-radius: 8px; /* 모서리 둥글게 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 추가로 시각적 분리 */
+}
+
+/* 제목 스타일 추가 */
+h2 {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #006937;
+    margin-bottom: 20px;
+}
+
+/* form 스타일 */
 form {
-    padding: 0;
-    border-radius: 0;
-    box-shadow: none;
+    padding: 20px;
+    background-color: #f9f9f9; /* 폼 배경색 */
+    border-radius: 8px;
 }
 
+/* 입력 필드 스타일 */
 form div {
     margin-bottom: 20px;
 }
@@ -101,6 +135,7 @@ input {
     border-radius: 4px;
 }
 
+/* 버튼 스타일 */
 button {
     background-color: #3b5e3b;
     color: white;
