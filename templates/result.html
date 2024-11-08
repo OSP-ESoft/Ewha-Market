@@ -1,0 +1,34 @@
+{% extends "index.html" %}
+{% block section %}
+<div style="text-align: center;">
+<p>
+    <img src="{{img_path}}"/><br>
+    판매자: {{data.seller}} <br>
+    상품명: {{data.name}} <br>
+    카테고리: {{data.category}}<br>
+    
+    {% if data['status'] == "lnew" %}
+    상태: 상
+    {% endif %}
+    {% if data['status'] == "new" %}
+    상태: 최상
+    {% endif %}
+    {% if data['status'] == "used" %}
+    상태: 중, 사용감o
+    {% endif %}
+    <br>
+</p>
+<p>
+    {% if data['card'] == "Y" %}
+    카드 결제 가능
+    {% endif %}
+    {% if data['card'] == "N" %}
+    카드 결제 불가
+    {% endif %}
+</p><br>
+<p>
+    연락처: {{data.email}} 또는 {{data.phone}} <br>
+    주소: {{data.addr}} <br>
+</p>
+</div>
+{% endblock section %}
