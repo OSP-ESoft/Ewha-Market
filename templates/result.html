@@ -1,33 +1,39 @@
 {% extends "index.html" %}
 {% block section %}
 <div style="text-align: center;">
-<p>
-    <img src="{{img_path}}"/><br>
+<p><br><br>
+    <img src="{{img_path}}" style="width: 500px; height:fit-content;"/><br>
     판매자: {{data.seller}} <br>
     상품명: {{data.name}} <br>
     카테고리: {{data.category}}<br>
     
-    {% if data['status'] == "lnew" %}
-    상태: 상
+    {% if data['condition'] == "매우 좋음" %}
+    상태: 매우 좋음
     {% endif %}
-    {% if data['status'] == "new" %}
-    상태: 최상
+    {% if data['condition'] == "좋음" %}
+    상태: 좋음
     {% endif %}
-    {% if data['status'] == "used" %}
-    상태: 중, 사용감o
+    {% if data['condition'] == "양호" %}
+    상태: 양호
+    {% endif %}
+    {% if data['condition'] == "조금 별로" %}
+    상태: 조금 별로
+    {% endif %}
+    {% if data['condition'] == "별로" %}
+    상태: 별로
     {% endif %}
     <br>
 </p>
 <p>
-    {% if data['card'] == "Y" %}
-    카드 결제 가능
+    {% if data['payment'] == "send" %}
+    결제 : 계좌이체
     {% endif %}
-    {% if data['card'] == "N" %}
-    카드 결제 불가
+    {% if data['payment'] == "cash" %}
+    결제 : 현금
     {% endif %}
 </p><br>
 <p>
-    연락처: {{data.email}} 또는 {{data.phone}} <br>
+    연락처: {{data.phone}} <br>
     주소: {{data.addr}} <br>
 </p>
 </div>

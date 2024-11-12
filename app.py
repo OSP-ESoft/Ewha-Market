@@ -1,7 +1,10 @@
 from flask import Flask, render_template, request, flash
+from database import DBhandler
 import sys
+import hashlib
 application = Flask(__name__)
 application.config["SECRET_KEY"] = "ABCD"
+DB = DBhandler()
 
 @application.route("/")
 def hello():
@@ -29,10 +32,18 @@ def logout():
 def registerpage():
     return render_template("registerpage.html")
 
-@application.route("/register")
+@application.route("/register", methods=['POST'])
 def register():
-    flash("회원가입")
-    return render_template("index.html")
+    data=request.form
+    pw=request.form['pw']
+    pw_hash = hashlib.sha256(pw.encode('utf-8')).hexdigest()
+    
+    if DB.insert_user(data,pw_hash):
+        flash("회원가입 완료!")
+        return render_template("loginpage.html")
+    else:
+        flash("중복되는 아이디입니다.")
+        return render_template("registerpage.html")
 
 @application.route("/list")
 def view_list():
@@ -41,6 +52,10 @@ def view_list():
 @application.route("/review")
 def view_review():
     return render_template("review.html")
+
+@application.route("/detail_review")
+def view_detail_review():
+    return render_template("detail_review.html")
 
 @application.route("/reg_items")
 def reg_item():
@@ -59,6 +74,7 @@ def reg_item_submit():
     image_file.save("static/images/{}".format(image_file.filename))
 
     data = request.form
+    DB.insert_item(data['name'], data, image_file.filename)
     '''
     name = request.args.get("name")
     seller = request.args.get("seller")
@@ -71,7 +87,7 @@ def reg_item_submit():
     '''
 
     print(data)
-    return render_template("result.html", data=data,  img_path="static/images/{}".format(image_file.filename))
+    return render_template("result.html", data=data, img_path="static/images/{}".format(image_file.filename))
 
 '''
 @application.route("/submit_item_post", methods=['POST'])

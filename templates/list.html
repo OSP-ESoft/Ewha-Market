@@ -1,4 +1,40 @@
 {% extends "index.html" %}
+
+{% block extrahead %}
+<link rel="stylesheet" href="static/style_list.css">
+{% endblock %}
+
 {% block section %}
-    등록된 상품 리스트 조회 화면입니다.
+<body>
+    <!-- 네비게이션 바 아래 상품 분류 필터부터 구현 -->
+    <div class="category_btn">
+        <button class="daily_products" data-filter="daily_products" onclick="loadProducts('생활용품')">
+          생활용품
+        </button>
+        <button class="books" data-filter="books" onclick="loadProducts('책')">
+          책
+        </button>
+        <button class="ewha_goods" data-filter="ewha_goods" onclick="loadProducts('이화 굿즈')">
+          이화 굿즈
+        </button>
+        <button class="etc" data-filter="etc" onclick="loadProducts('기타')">
+          기타
+        </button>
+    </div>
+
+
+    
+    <div class="product-grid" id="products">
+      <!-- 상품들 추가될 영역 -->
+    </div>
+    
+    <!-- 페이지네이션 버튼 -->
+    <div class="pagination" id="pagination">
+      
+    </div>
+    
+    
+
+    <script src="{{ url_for('static', filename='products.js') }}"></script>
+</body>
 {% endblock section %}

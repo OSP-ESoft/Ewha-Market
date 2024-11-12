@@ -1,6 +1,11 @@
+body {
+  background-color: #f9f9f9;
+}
+
 .loginbox {
     text-align: center;
     padding-top: 30px;
+    
 }
 
 .input-field{
