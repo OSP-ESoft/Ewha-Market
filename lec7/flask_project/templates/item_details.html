@@ -1,10 +1,26 @@
 
 {% extends "index.html" %}
 {% block section %}
+
 <head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='item_details.css') }}">
 </head>
 <body>
+    <div class="category_btn">
+        <button class="daily_products" data-filter="daily_products" onclick="loadProducts('생활용품')">
+          생활용품
+        </button>
+        <button class="books" data-filter="books" onclick="loadProducts('책')">
+          책
+        </button>
+        <button class="ewha_goods" data-filter="ewha_goods" onclick="loadProducts('이화 굿즈')">
+          이화 굿즈
+        </button>
+        <button class="etc" data-filter="etc" onclick="loadProducts('기타')">
+          기타
+        </button>
+    </div>
     <div id="product-detail">
         <!-- 상품 상세 정보가 여기에 표시됨 -->
     </div>
@@ -17,8 +33,10 @@
         <p><strong>상세 설명:</strong> {{ product.description }}</p>
             
     </div>
+    <button class="buy_btn">구매하기</button>
 
     <script src="{{ url_for('static', filename='products.js') }}"></script>
 </body>
+
 {% endblock section %}
 
