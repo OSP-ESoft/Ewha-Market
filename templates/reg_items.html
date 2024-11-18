@@ -8,7 +8,15 @@
 <form action="/submit_item" enctype="multipart/form-data" method="post">
     <main>
         <h2>상품 등록</h2>
-        <div> <br><br>
+        <div><br><br>
+            <label for="category"> 카테고리 </label> <br>
+            <select id="category" name="category" required>
+                <option value="daily_products"> 생활용품 </option>
+                <option value="books" selected> 책 </option>
+                <option value="ewha_goods"> 이화 굿즈 </option>
+            </select><br><br>
+        </div>
+        <div>
             <label for="name"> 상품명 : </label> <br>
             <input type="text" name="name" id="name" placeholder="ex) 마우스" required><br><br>
         </div>

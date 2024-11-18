@@ -5,20 +5,44 @@
 {% endblock %}
 
 {% block section %}
+
 <body>
-    <div id="product-detail">
-        <!-- 상품 상세 정보가 여기에 표시됨 -->
-    </div>
     <div id="details">
+        <!-- 상품 상세 정보가 여기에 표시됨 -->
+        <p>
+            <!-- 카테고리 -->
+            {{data.category}}
+        </p>
+        <p>
+            <!-- 상품 이름 -->
+            <b>{{name}}</b>
+            </p>
+        <p>
+            <!-- 주소 -->
+            <br><br>{{data.addr}}
+        </p>
         
-        <h1>{{ product.title }}</h1>
-        <img src="{{ url_for('static/images', filename=명품자바에센셜표지.jpg) }}" alt="{{ product.title }}">
-        <p><strong>카테고리:</strong> {{ product.category }}</p>
-        <p><strong>날짜:</strong> {{ product.date }}</p>
-        <p><strong>상세 설명:</strong> {{ product.description }}</p>
-            
+        <p>
+            <!-- 연락처 -->
+            {{data.phone}} 
+        </p>
+    
+        <p>
+            결제 방식:
+            {% if data['card'] == "Y" %}
+            계좌 이체
+            {% endif %}
+            {% if data['card'] == "N" %}
+            현금
+            {% endif %}
+        </p>
+        <img src="../../static/images/{{data.img_path}}" , width=140, height=200>
     </div>
 
-    <script src="{{ url_for('static', filename='products.js') }}"></script>
+    <!-- <script src="{{ url_for('static', filename='products.js') }}"></script> -->
 </body>
 {% endblock section %}
+
+
+
+
