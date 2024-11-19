@@ -24,8 +24,12 @@
                 <a href="/">Ewha Market</a>
             </h1>
             <div class="utilarea">
-                <a href="/loginpage" class="login">로그인</a>
+                {% if session['id'] %}
+                <a href="/logout" class="logout">로그아웃</a>
                 <a href="/mypage" class="mypg">마이페이지</a>
+                {% else %}
+                <a href="/loginpage" class="login">로그인</a>
+                {% endif %}
             </div>
         </div>
         <div class="link">
