@@ -30,7 +30,7 @@ def login():
         return render_template("index.html")
     else:
         flash("잘못된 값입니다.")
-        return render_template("login.html")
+        return render_template("loginpage.html")
     
 
 @application.route("/logout")
