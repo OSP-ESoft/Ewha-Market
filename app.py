@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash, redirect, url_for
+from flask import Flask, render_template, request, flash, session, redirect, url_for
 from database import DBhandler
 import sys
 import hashlib
@@ -19,14 +19,24 @@ def loginpage():
 def mypage():
     return render_template("mypage.html")
 
-@application.route("/login")
+@application.route("/login", methods=['POST'])
 def login():
     flash("로그인")
-    return render_template("index.html")
+    id_=request.form['id']
+    pw=request.form['pw']
+    pw_hash = hashlib.sha256(pw.encode('utf-8')).hexdigest()
+    if DB.find_user(id_,pw_hash):
+        session['id']=id_
+        return render_template("index.html")
+    else:
+        flash("잘못된 값입니다.")
+        return render_template("login.html")
+    
 
 @application.route("/logout")
 def logout():
     flash("로그아웃")
+    session.clear()
     return render_template("index.html")
 
 @application.route("/registerpage")

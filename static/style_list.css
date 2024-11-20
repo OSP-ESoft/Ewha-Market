@@ -60,13 +60,14 @@
   
 .product-item {
     border:none;
-    padding: 0;
+    padding: 20px;
     text-align: center;
 }
   
 .product-item img {
     width: 100%;
     height: auto;
+    padding: 20px;
     max-width: 190px;
     max-height: 190px; /* 이미지 최대 높이 */
 
