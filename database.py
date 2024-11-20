@@ -11,6 +11,7 @@ class DBhandler:
     def insert_item(self, name, data, img_path):
         item_info ={
             "seller": "me",
+            "category": data.get('category', "unknown"), #카테고리 부분.. 13주차에 수정 예정
             "price" : data["price"],
             "addr": data['addr'],
             "phone": data['phone'],
@@ -52,6 +53,7 @@ class DBhandler:
                 if value['id'] == id_string:
                     return False
             return True
+
     
     def find_user(self, id_, pw_):
         users = self.db.child("user").get()
@@ -62,6 +64,7 @@ class DBhandler:
                 return True
         return False
     
+
     # item 노드 아래 값들 가져오기
     def get_items(self):
         items = self.db.child("item").get().val()

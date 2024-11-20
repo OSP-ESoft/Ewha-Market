@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash, session
+from flask import Flask, render_template, request, flash, session, redirect, url_for
 from database import DBhandler
 import sys
 import hashlib
@@ -8,7 +8,8 @@ DB = DBhandler()
 
 @application.route("/")
 def hello():
-    return render_template("index.html")
+    # return render_template("index.html")
+    return redirect(url_for('view_list'))
 
 @application.route("/loginpage")
 def loginpage():
@@ -29,7 +30,7 @@ def login():
         return render_template("index.html")
     else:
         flash("잘못된 값입니다.")
-        return render_template("login.html")
+        return render_template("loginpage.html")
     
 
 @application.route("/logout")
@@ -117,7 +118,6 @@ def reg_item():
 @application.route("/reg_reviews")
 def reg_review():
     return render_template("reg_reviews.html")
-
 
 @application.route("/submit_item", methods=['POST'])
 def reg_item_submit():
