@@ -19,11 +19,10 @@
     padding-top:12px;
 }
 
-
-.daily_products,
-.books,
-.ewha_goods,
-.etc {
+.ott,
+.study,
+.delivery,
+.workout {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 17px;
     text-align: center;
@@ -43,10 +42,10 @@
     cursor: pointer;
 }
   
-.daily_products:focus,
-.books:focus ,
-.ewha_goods:focus,
-.etc:focus {
+.ott:focus,
+.study:focus ,
+.delivery:focus,
+.workout:focus {
     
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 17px;
@@ -67,75 +66,43 @@
     padding: 5px 15px;
 }
 
+.text {
+    text-align: center;
+}
+
 /* 카드형태로 수정 */
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr); /* 한 줄에 5개의 아이템 */
+.group-list {
+    display: block;
     gap: 10px;
-    padding: 50px 150px;
     border: none;
+    padding: 50px 50px;
 }
   
-.product-item {
-    border:none;
-    padding: 20px;
-    text-align: center;
-}
-  
-.product-item img {
-    width: 100%;
-    height: auto;
-    padding: 20px;
-    max-width: 190px;
-    max-height: 190px; /* 이미지 최대 높이 */
+.group {
+    display: block;
+    width: 60%;
+    height:50px;
+    background-color: #e9ecef;
+    text-align: left;
+    padding-left: 20px;
+    padding-top: 15px;
+    margin: 0 auto;
 
-    object-fit: cover;
     border-radius: 30px;
+    border-color: #ffffff;
 
+    margin-bottom: 20px;
 }
-  
-.product-item .title {
-    font-size: 1.1em;
-    font-weight: bold;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    margin: 10px 0 5px;
 
-    display: inline-block;
-    max-width: 180px;
+.status-button {
+    display: inline;
+    float: right;
+    margin-top: -22px;
+    margin-right: 30px;
+
+    background-color: #006937;
     text-align: center;
-    cursor: pointer;
-    position: relative;
-
-}
-
-  
-
-.product-item .title[data-title]:hover::after {
-    content: attr(data-title); /* data-title 속성의 값을 툴팁으로 표시 */
-    position: absolute;
-    white-space: normal;        /* 툴팁 텍스트가 여러 줄로 표시되도록 */
-    background: rgba(0, 0, 0, 0.7);
-    color: #fff;
-    padding: 5px;
-    border-radius: 3px;
-    font-size: 12px;
-    left: 0;
-    top: 100%;
-    width: auto;
-    word-wrap: break-word;
-    max-width:200px;
-    z-index: 10;
-}
-
-.product-item .title[title]:hover {
-    overflow: visible;
-}
-
-.product-item .date {
-    font-size: 0.9em;
-    color: #666;
+    color:#ffffff;
 }
   
 /* .pagination {

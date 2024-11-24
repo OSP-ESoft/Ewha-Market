@@ -85,9 +85,6 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.item-description {
-    max-width: 500px;
-}
 
 .item-description h1 {
     font-size: 1.8em;
@@ -117,4 +114,13 @@ body {
 
 .buy_btn:hover {
     background-color: #004d00;
+}
+
+.description {
+    display: flex;
+    width: 200%;
+    padding-top: 10px;
+    padding-left: 10px;
+    border-radius: 20px;
+    background-color: #e9ecef;
 }

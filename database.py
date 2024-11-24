@@ -8,9 +8,9 @@ class DBhandler:
         firebase = pyrebase.initialize_app(config)
         self.db = firebase.database()
 
-    def insert_item(self, name, data, img_path):
+    def insert_item(self, name, data, user_id, img_path):
         item_info ={
-            "seller": "me",
+            "seller": user_id,
             "price" : data["price"],
             "addr": data['addr'],
             "phone": data['phone'],
@@ -76,5 +76,31 @@ class DBhandler:
             key_value = res.key()
 
             if key_value == name:
+                target_value = res.val()
+        return target_value
+
+    def get_groups(self):
+        groups = self.db.child("group").get().val()
+        return groups
+    
+    def insert_group(self, title, data, user_id):
+        group_info ={
+            "writer": user_id,
+            "phone": data['phone'],
+            "category": data['category'],
+            "description" : data["description"],
+            "status" : "모집중"
+        }
+        self.db.child("group").child(title).set(group_info)
+        return True
+    
+    def get_group_bytitle(self, title):
+        items = self.db.child("group").get()
+        target_value=""
+        print("##########", title)
+        for res in items.each():
+            key_value = res.key()
+            
+            if key_value == title:
                 target_value = res.val()
         return target_value

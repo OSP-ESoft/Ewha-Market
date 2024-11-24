@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash, session
+from flask import Flask, render_template, request, flash, session, redirect
 from database import DBhandler
 import sys
 import hashlib
@@ -29,7 +29,7 @@ def login():
         return render_template("index.html")
     else:
         flash("잘못된 값입니다.")
-        return render_template("login.html")
+        return render_template("loginpage.html")
     
 
 @application.route("/logout")
@@ -71,6 +71,7 @@ def view_list():
 
     item_counts = len(data)
     data = dict(list(data.items())[start_idx:end_idx])
+    print(data)
 
     total_count = len(data)
     rows = []  # 상품을 row 단위로 나누어 저장할 리스트
@@ -80,7 +81,8 @@ def view_list():
             rows.append(dict(list(data.items())[i * per_row:])) 
         else:
             rows.append(dict(list(data.items())[i * per_row:(i + 1) * per_row]))
-    
+
+    print(rows, type(rows))
     return render_template(
         "list.html",
         # datas = data.items(),
@@ -96,11 +98,57 @@ def DynamicUrl(varible_name):
     return str(varible_name)
 
 @application.route("/view_detail/<name>/")
-def view_item_detail(name):
+def view_detail(name):
     print("###name:",name)
     data = DB.get_item_byname(str(name))
     print("####data:",data)
     return render_template("detail.html", name=name, data=data)
+
+@application.route("/group")
+def view_group():
+    page = request.args.get("page", 1, type=int)
+
+    per_page = 10
+
+    #보여줄 페이지의 첫/마지막 상품 인덱스
+    start_idx = per_page*(page-1)
+    end_idx = per_page*(page)
+
+    data = DB.get_groups() #read table
+    d = []
+    
+    if data:
+        group_counts = len(data)
+        data = dict(list(data.items())[start_idx:end_idx])
+        print(data, type(data))
+        total_count = len(data)
+        for i in range(1):
+            d.append(dict(list(data.items())[i:]))
+
+    
+        return render_template(
+            "group.html",
+            datas = d,
+            limit = per_page,
+            page = page,
+            page_count = int((group_counts/per_page)+1),
+            total = group_counts)
+    else:
+        return render_template(
+            "group.html",
+            # datas = data.items(),
+            rows = 0,
+            limit = 0,
+            page = page,
+            page_count = 1,
+            total = 0)
+    
+@application.route("/view_group_detail/<title>/")
+def view_group_detail(title):
+    print("###title:",title)
+    data = DB.get_group_bytitle(str(title))
+    print("####data:",data)
+    return render_template("detail_group.html", title=title, data=data)
 
 @application.route("/review")
 def view_review():
@@ -112,33 +160,52 @@ def view_detail_review():
 
 @application.route("/reg_items")
 def reg_item():
-    return render_template("reg_items.html")
+    id_ = session.get('id', None)
+    if not id_:
+        flash("로그인하십시오.")
+        return redirect("/loginpage")
+    else:
+        return render_template("reg_items.html")
 
 @application.route("/reg_reviews")
 def reg_review():
-    return render_template("reg_reviews.html")
+    id_ = session.get('id', None)
+    if not id_:
+        flash("로그인하십시오.")
+        return redirect("/loginpage")
+    else:
+        return render_template("reg_reviews.html")
 
+@application.route("/reg_groups")
+def reg_group():
+    id_ = session.get('id', None)
+    if not id_:
+        flash("로그인하십시오.")
+        return redirect("/loginpage")
+    else:
+        return render_template("reg_groups.html")
 
 @application.route("/submit_item", methods=['POST'])
 def reg_item_submit():
+    id_ = session.get('id', None)
     image_file = request.files["file"]
     image_file.save("static/images/{}".format(image_file.filename))
 
     data = request.form
-    DB.insert_item(data['name'], data, image_file.filename)
-    '''
-    name = request.args.get("name")
-    seller = request.args.get("seller")
-    addr = request.args.get("addr")
-    email = request.args.get("email")
-    category = request.args.get("category")
-    card = request.args.get("card")
-    status = request.args.get("status")
-    phone = request.args.get("phone")
-    '''
+    DB.insert_item(data['name'], data, id_, image_file.filename) #name = request.args.get("name")
+    name = data['name']
+    
+    return view_detail(name)
 
-    print(data)
-    return render_template("result.html", data=data, img_path="static/images/{}".format(image_file.filename))
+@application.route("/submit_group", methods=['POST'])
+def reg_group_submit():
+    id_ = session.get('id', None)
+    data = request.form
+    DB.insert_group(data['title'], data, id_)
+
+    title = data['title']
+
+    return view_group_detail(title)
 
 '''
 @application.route("/submit_item_post", methods=['POST'])
