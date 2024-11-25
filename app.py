@@ -115,9 +115,58 @@ def view_detail_review():
 def reg_item():
     return render_template("reg_items.html")
 
-@application.route("/reg_reviews")
-def reg_review():
-    return render_template("reg_reviews.html")
+from datetime import datetime  # 날짜 처리를 위해 추가
+
+@application.route("/reg_reviews", methods=["GET", "POST"])
+def reg_reviews():
+    if request.method == "POST":
+        try:
+            # POST 요청 처리 (데이터 저장)
+            data = request.form.to_dict()
+            image_file = request.files.get("file")
+
+            # 기본 값 설정
+            product = data.get("product", "")
+            title = data.get("title", "")
+            content = data.get("content", "")
+            payment = data.get("payment", "")
+            rating = data.get("rating", "0")
+
+            # 필수 입력값 체크
+            if not product or not title:
+                flash("상품명과 제목은 필수 항목입니다.")
+                return render_template("reg_reviews.html")
+
+            # 이미지 파일 처리
+            if image_file and image_file.filename != "":
+                image_path = f"static/images/{image_file.filename}"
+                image_file.save(image_path)
+            else:
+                # 기본 이미지 경로 설정
+                image_path = "/static/images/default.jpg"
+
+            # Firebase DB 저장
+            review_data = {
+                "product": product,
+                "title": title,
+                "content": content,
+                "payment": payment,
+                "rating": rating,
+                "image": f"/{image_path}",  # 경로에 "/"를 추가하여 Flask static 경로와 일치시킴
+                "date": datetime.now().strftime("%Y-%m-%d"),
+            }
+            DB.db.child("review").push(review_data)
+
+            flash("리뷰가 성공적으로 등록되었습니다!")
+            return redirect(url_for("view_review"))
+        except Exception as e:
+            print(f"Error: {e}")
+            flash("리뷰 등록 중 오류가 발생했습니다.")
+            return render_template("reg_reviews.html")
+    else:
+        # GET 요청 처리 (리뷰 등록 페이지 렌더링)
+        return render_template("reg_reviews.html")
+
 
 @application.route("/submit_item", methods=['POST'])
 def reg_item_submit():
