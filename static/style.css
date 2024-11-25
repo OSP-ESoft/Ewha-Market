@@ -81,8 +81,11 @@ a {
     
 }
 
+#heart {
+    color: grey;
+    font-size: 30px;
+}
 
-
-/* .login_menu:hover {
-    background-color: #037a46; 호버 시 배경 색상
- } */
+#heart.red {
+    color:red;
+}
