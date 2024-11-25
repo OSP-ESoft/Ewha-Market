@@ -15,6 +15,22 @@
 <section class="body">
 <div class="goodlst">
     <ol class="goods">
+        <!-- 동적으로 추가된 데이터 -->
+        {% for review in reviews %}
+        <li>
+            <a href="/detail_review">
+                <img src="{{ review.image }}" alt="상품" class="goods">
+                <div class="reviews">
+                    <span class="reviewtitle">{{ review.title }}</span>
+                </div>
+                <div class="date">
+                    <span class="registerdate">등록일자: {{ review.date }}</span>
+                </div>
+            </a>
+        </li>
+        {% endfor %}
+
+        <!-- 기존 정적 데이터 -->
         <li>
             <a href="/detail_review">
                 <img src="static/images/1.jpg" alt = "상품" class="goods">
