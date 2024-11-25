@@ -130,6 +130,11 @@ def reg_item():
 
 from datetime import datetime  # 날짜 처리를 위해 추가
 
+@application.route("/reg_reviews_init/<name>/")
+def reg_reviews_init(name):
+    return render_template("reg_reviews.html", name=name)
+
+
 @application.route("/reg_reviews", methods=["GET", "POST"])
 def reg_reviews():
     if request.method == "POST":

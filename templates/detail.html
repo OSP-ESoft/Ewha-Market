@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block section %}
+
 <body>
     <!-- 메인 컨텐츠 -->
     <div class="container">
@@ -12,10 +13,10 @@
         <aside class="sidebar">
             <h2>상품 카테고리</h2>
             <ul class="category_btn">
-                <li><button class = "daily_products">생활용품</button></li>
+                <li><button class="daily_products">생활용품</button></li>
                 <li><button class="books">책</button></li>
-                <li><button class = "ewha_goods">이화 굿즈</button></li>
-                <li><button class = "etc">기타</button></li>
+                <li><button class="ewha_goods">이화 굿즈</button></li>
+                <li><button class="etc">기타</button></li>
             </ul>
         </aside>
 
@@ -49,10 +50,13 @@
                         {% endif %}
                         {% if data['payment'] == "cash" %}
                         현금
-                        {% endif %}  
+                        {% endif %}
                     </p>
                     <p><strong>가격:</strong>{{data.price}}</p>
                     <button class="buy_btn">구매하기</button>
+                    <button onclick="location.href='/reg_reviews_init/{{name}}/';" class="reg_review_btn">
+                        리뷰등록
+                    </button>
                 </div>
             </div>
         </section>
@@ -60,6 +64,3 @@
 </body>
 
 {% endblock section %}
-
-
-
