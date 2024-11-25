@@ -81,3 +81,13 @@ class DBhandler:
             if key_value == name:
                 target_value = res.val()
         return target_value
+        
+    #리뷰 저장 메소드
+    def insert_review(self, review_data):
+         self.db.child("review").push(review_data)
+         return True
+
+    #리뷰 조회 메소드
+    def get_reviews(self):
+         reviews = self.db.child("review").get().val()
+         return reviews
