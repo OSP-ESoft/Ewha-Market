@@ -81,6 +81,11 @@ button:hover {
     cursor: pointer;
 }
 
+.star:hover,
+.star:hover ~ .star {
+    color: #006400; /
+}
+
 .star.selected {
     color: #006400;
 }
