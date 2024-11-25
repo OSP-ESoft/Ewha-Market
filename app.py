@@ -103,9 +103,22 @@ def view_item_detail(name):
     print("####data:",data)
     return render_template("detail.html", name=name, data=data)
 
+
 @application.route("/review")
 def view_review():
-    return render_template("review.html")
+    try:
+        reviews = DB.db.child("review").get().val()  # Firebase에서 데이터 가져오기
+        reviews_list = []  # 가져온 데이터를 리스트로 변환
+        if reviews:
+            for key, value in reviews.items():
+                reviews_list.append(value)
+
+        # 리뷰 개수와 데이터를 HTML에 전달
+        return render_template("review.html", reviews=reviews_list, count=len(reviews_list))
+    except Exception as e:
+        print(f"Error: {e}")
+        flash("리뷰 데이터를 불러오는 중 오류가 발생했습니다.")
+        return render_template("review.html", reviews=[], count=0)
 
 @application.route("/detail_review")
 def view_detail_review():
