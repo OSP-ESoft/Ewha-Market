@@ -5,155 +5,49 @@
 {% endblock %}
 
 {% block section %}
-<div class="review">리뷰 14개</div>
-<div class="sort">
-    <button type="button" sort="recentlst" class="on">최신 순</button>
-    <button type="button" sort="highlst">별점 높은 순</button>
-    <button type="button" sort="lowlst">별점 낮은 순</button>
+
+{% if total > 0 %}
+<div class="info">
+    <div class="review">리뷰 총 {{total}}개</div>
+        <div class="sort">
+            <button type="button" sort="recentlst" class="on">최신 순</button>
+            <button type="button" sort="highlst">별점 높은 순</button>
+            <button type="button" sort="lowlst">별점 낮은 순</button>
+    </div>
 </div>
-</section>
 <section class="body">
+{% for row in rows%}
 <div class="goodlst">
     <ol class="goods">
         <!-- 동적으로 추가된 데이터 -->
-        {% for review in reviews %}
+        {% for key, value in row.items()%}
         <li>
-            <a href="/detail_review">
-                <img src="{{ review.image }}" alt="상품" class="goods">
+            <a  onclick="location.href='/view_detail_review/{{key}}/';" style="cursor:pointer;">
+                <img src="{{value.image}}" alt="상품" class="goods">
                 <div class="reviews">
-                    <span class="reviewtitle">{{ review.title }}</span>
+                    <span class="reviewtitle">{{value.title}}</span>
                 </div>
                 <div class="date">
-                    <span class="registerdate">등록일자: {{ review.date }}</span>
+                    <span class="registerdate">등록일자: {{ value.date }}</span>
                 </div>
             </a>
         </li>
         {% endfor %}
-
-        <!-- 기존 정적 데이터 -->
-        <li>
-            <a href="/detail_review">
-                <img src="static/images/1.jpg" alt = "상품" class="goods">
-            <div class="reviews">
-                <span class="reviewtitle">일기 잘 쓸게요!</span>
-            </div>
-            <div class="date">
-                <span class="registerdate">등록일자: 2024.07.11</span>
-            </div>
-        </li>
-    </a>
-    
-    <li>
-        <a href="/detail_review">
-            <img src="static/images/2.jpg" alt="상품" class="goods">
-
-        <div class="reviews">
-            <span class="reviewtitle">볼펜 사용 후기</span>
-        </div>
-        <div class="date">
-            <span class="registerdate">등록일자: 2024.09.11</span>
-        </div>
-        
-        </li>
-    </a>
-        <li>
-            <a href="/detail_review">
-                <img src="static/images/3.jpg" alt="상품" class="goods">
-            <div class="reviews">
-                <span class="reviewtitle">덕분에 좋은 점수 받아갑니다~</span>
-            </div>
-            <div class="date">
-                <span class="registerdate">등록일자: 2024.09.10</span>
-            </div>
-        </li>
-    </a>
-        <li>
-            <a href="/detail_review">
-                <img src="static/images/4.jpg" alt="상품" class="goods">
-            <div class="reviews">
-                <span class="reviewtitle">상태가 그닥 좋지는 않은 책</span>
-            </div>
-            <div class="date">
-                <span class="registerdate">등록일자: 2024.09.10</span>
-            </div>
-        </li>
-    </a>
-        <li>
-            <a href="/detail_review">
-                <img src="static/images/5.jpg" alt="상품" class="goods">
-            <div class="reviews">
-                <span class="reviewtitle">대학 물리학 책 잘 썼습니다!</span>
-            </div>
-            <div class="date">
-                <span class="registerdate">등록일자: 2024.09.10</span>
-            </div>
-        </li>
-    </a>
-        <li>
-            <a href="/detail_review">
-                <img src="static/images/6.jpg" alt="상품" class="goods">
-            <div class="reviews">
-                <span class="reviewtitle">카메라 메모리 구매 후기</span>
-            </div>
-            <div class="date">
-                <span class="registerdate">등록일자: 2024.09.10</span>
-            </div>
-        </li>
-    </a>
-        <li>
-            <a href="/detail_review">
-                <img src="static/images/7.jpg" alt="상품" class="goods">
-            <div class="reviews">
-                <span class="reviewtitle">사용감 없는 공책</span>
-            </div>
-            <div class="date">
-                <span class="registerdate">등록일자: 2024.09.10</span>
-            </div>
-        </li>
-    </a>
-        <li>
-            <a href="/detail_review">
-                <img src="static/images/8.jpg" alt="상품" class="goods">
-            <div class="reviews">
-                <span class="reviewtitle">교양 교재 싸게 구매했어요!</span>
-            </div>
-            <div class="date">
-                <span class="registerdate">등록일자: 2024.09.10</span>
-            </div>
-        </li>
-        <li>
-            <a href="/detail_review">
-                <img src="static/images/9.jpg" alt="상품" class="goods">
-     
-            <div class="reviews">
-                <span class="reviewtitle">충전기 한달 사용 후기</span>
-            </div>
-            <div class="date">
-                <span class="registerdate">등록일자: 2024.09.10</span>
-            </div>
-        </li>
-               </a>
-        <li>
-            <a href="/detail_review">
-                <img src="static/images/10.jpg" alt="상품" class="goods">
-            </a>
-            <div class="reviews">
-                <span class="reviewtitle">공기계 필요했는데 잘 샀어요!</span>
-            </div>
-            <div class="date">
-                <span class="registerdate">등록일자: 2024.09.11</span>
-            </div>
-        </li>
-    </a>
-    </ol>
-</div>
+    {% endfor %}
+ 
+{% else %}
+<p>등록된 상품이 없습니다.</p>
+{% endif %}
 </section>
 
-<section class="pagenum">
-<div class = "numsort">
-<button type="button" class="selectednum">1</button>
-<button type="button"  class="num">2</button>
-<button type="button"  class="num">></button>
+<div class="pagination" id="pagination">
+    <ul>
+      <li>
+        {% for i in range(1, page_count+1)%}
+        <a href="{{url_for('view_review', page=i)}}" color="black">{{i}}</a>
+        {% endfor %}
+      </li>
+    </ul>
 </div>
 
 {% endblock section %}
