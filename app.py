@@ -202,7 +202,11 @@ def view_detail_review(title):
     print("###name:",title)
     data = DB.get_review_bytitle(str(title))
     print("####data:",data)
-    return render_template("detail_review.html",title=title,data=data,) 
+    return render_template("detail_review.html",title=title,data=data,)
+
+@application.route("/reg_reviews_init/<name>/")
+def reg_reviews_init(name):
+ return render_template("reg_reviews.html", name=name)
 
 
 #그룹 및 상세 그룹
