@@ -49,23 +49,24 @@
     padding: 5px 15px;
 }
 
-/* 카드형태로 수정 */
+/* 카드형태로 수정
 .product-grid {
-    display: grid;
+    display: flex;
     grid-template-columns: repeat(5, 1fr);
     /* 한 줄에 5개의 아이템 */
-    gap: 10px;
+    /* gap: 10px;
     padding: 50px 150px;
     border: none;
-}
+} */ 
 
-.product-item {
+#products {
+    display:table;
     border: none;
     padding: 20px;
     text-align: center;
 }
 
-.product-item img {
+#products img {
     width: 100%;
     height: auto;
     padding: 20px;
@@ -78,7 +79,7 @@
 
 }
 
-.product-item .title {
+#products .title {
     font-size: 1.1em;
     font-weight: bold;
     white-space: nowrap;
@@ -96,7 +97,7 @@
 
 
 
-.product-item .title[data-title]:hover::after {
+#products .title[data-title]:hover::after {
     content: attr(data-title);
     /* data-title 속성의 값을 툴팁으로 표시 */
     position: absolute;
@@ -115,11 +116,11 @@
     z-index: 10;
 }
 
-.product-item .title[title]:hover {
+#products .title[title]:hover {
     overflow: visible;
 }
 
-.product-item .date {
+#products .date {
     font-size: 0.9em;
     color: #666;
 }
