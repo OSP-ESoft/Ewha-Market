@@ -1,5 +1,6 @@
 import pyrebase
 import json 
+from datetime import datetime 
 
 class DBhandler:
     def __init__(self):
@@ -8,23 +9,7 @@ class DBhandler:
         firebase = pyrebase.initialize_app(config)
         self.db = firebase.database()
 
-    def insert_item(self, name, data, img_path):
-        item_info ={
-            "seller": "me",
-            "category": data.get('category', "unknown"), #카테고리 부분.. 13주차에 수정 예정
-            "price" : data["price"],
-            "addr": data['addr'],
-            "phone": data['phone'],
-            "card": data['card'],
-            "payment" : data["payment"],
-            "condition": data['condition'],
-            "description" : data["description"],
-            "img_path": img_path
-        }
-        self.db.child("item").child(name).set(item_info)
-        print(data,img_path)
-        return True
-    
+
     def insert_user(self, data, pw):
         user_info = {
             "id": data['id'],
@@ -53,7 +38,6 @@ class DBhandler:
                 if value['id'] == id_string:
                     return False
             return True
-
     
     def find_user(self, id_, pw_):
         users = self.db.child("user").get()
@@ -65,12 +49,54 @@ class DBhandler:
         return False
     
 
-    # item 노드 아래 값들 가져오기
+    #review 
+    def get_reviews(self):
+         reviews = self.db.child("review").get().val()
+         return reviews
+
+    def insert_review(self, title, data, img_path,user_id):
+        review_info = {
+            "writer": user_id,
+            "product": data["product"],
+            "title": data["title"],
+            "content": data["content"],
+            "payment": data["payment"],
+            "rating": data["rating"],
+            "img_path": img_path,
+            "date": datetime.now().strftime("%Y-%m-%d"),  # 현재 날짜를 문자열로 포맷
+        }
+
+        self.db.child("review").child(title).set(review_info)
+        return True    
+    def get_review_bytitle(self, title):
+        reviews = self.db.child("review").get()
+        for res in reviews.each():
+            if res.key() == title:
+                return res.val() 
+        return None  
+           
+
+    # item
     def get_items(self):
         items = self.db.child("item").get().val()
         return items
     
-    #상품 이름으로 item 테이블에서 정보 가져오기
+    def insert_item(self, title, data, user_id, img_path):
+        item_info ={
+            "seller": user_id,
+            "price" : data["price"],
+            "addr": data['addr'],
+            "phone": data['phone'],
+            "card": data['card'],
+            "payment" : data["payment"],
+            "condition": data['condition'],
+            "description" : data["description"],
+            "img_path": img_path
+        }
+        self.db.child("item").child(title).set(item_info)
+        print(data,img_path)
+        return True
+        
     def get_item_byname(self, name):
         items = self.db.child("item").get()
         target_value=""
@@ -81,18 +107,36 @@ class DBhandler:
             if key_value == name:
                 target_value = res.val()
         return target_value
-        
-    #리뷰 저장 메소드
-    def insert_review(self, review_data):
-         self.db.child("review").push(review_data)
-         return True
+    
+    # group
+    def get_groups(self):
+        groups = self.db.child("group").get().val()
+        return groups
+    
+    def insert_group(self, title, data, user_id):
+        group_info ={
+            "writer": user_id,
+            "phone": data['phone'],
+            "category": data['category'],
+            "description" : data["description"],
+            "status" : "모집중"
+        }
+        self.db.child("group").child(title).set(group_info)
+        return True
 
-    #리뷰 조회 메소드
-    def get_reviews(self):
-         reviews = self.db.child("review").get().val()
-         return reviews
+    def get_group_bytitle(self, title):
+        items = self.db.child("group").get()
+        target_value=""
+        print("##########", title)
+        for res in items.each():
+            key_value = res.key()
+            
+            if key_value == title:
+                target_value = res.val()
+        return target_value
     
     
+    #좋아요
     def get_heart_byname(self, uid, name):
         hearts = self.db.child("heart").child(uid).get()
         target_value=""
@@ -111,4 +155,4 @@ class DBhandler:
         "interested": isHeart
         }
         self.db.child("heart").child(user_id).child(item).set(heart_info)
-        return True
+        return True   
