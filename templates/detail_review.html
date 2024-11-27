@@ -1,44 +1,48 @@
 {% extends "index.html" %}
 
 {% block extrahead %}
-<link rel="stylesheet" href="static/style_detail_review.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='style_detail_review.css') }}">
 {% endblock %}
 
 {% block section %}
-    <!-- 메인 컨텐츠 -->
-    <div class="container">
-        <!-- 사이드바 -->
-        <aside class="sidebar">
-            <h2>상품 카테고리</h2>
-            <ul class="category-list">
-                <li><button>생활용품</button></li>
-                <li><button class="active">책</button></li>
-                <li><button>이화 굿즈</button></li>
-                <li><button>기타 거래</button></li>
-            </ul>
-        </aside>
 
-        <!-- 상품 상세 정보 -->
-        <section class="product-detail">
+<body>
+    <div class="container">
+        <section class="item-detail">
             <div class="back-link">
-                <a href="#">← 책 - 명품 자바 에센셜</a>
+                <a href="{{url_for('view_review',page=i)}}">← {{title}}</a>
             </div>
-            <div class="product-info">
-                <div class="product-image">
-                    <img src="static/images/명품자바에센셜표지.jpg" alt="명품 자바 에센셜">
+            <div class="item-info">
+                <div class="item-image">
+                    <img src="{{ data.image }}" alt="Review Image">
                 </div>
-                <div class="product-description">
-                    <h1>명품 자바 에센셜</h1>
-                    <p><strong>저자:</strong> 홍기태</p>
-                    <p><strong>출판:</strong> 황소출판사</p>
-                    <p><strong>상품 상태:</strong> <span class="highlight">매우 좋음</span></p>
-                    <p><strong>상품 설명:</strong> 필기 흔적 없이 깨끗한 상태의 명품 자바 에센셜 개정판입니다.<br> 
-                    이화생활관에서 직거래 가능합니다.</p>
-                    <p><strong>결제 방법:</strong> 계좌 입금</p>
-                    <p><strong>가격:</strong> 10,000원</p>
-                    <button class="buy-button">구매하기</button>
+                <div class="item-description">
+                    <h1>제목: {{ title }}</h1>
+                    <p><strong>상품명:</strong> {{ data.product }}</p>
+                    <p><strong>등록일자:</strong> {{ data.date }}</p>
+                    <p><strong>별점:</strong> {{ data.rating }}</p>
+                    <p><strong>거래 방식:</strong>
+                        {% if data['payment'] == "card" %}
+                        카드
+                        {% endif %}
+                        {% if data['payment'] == "bank_transfer" %}
+                        계좌이체
+                        {% endif %}
+                        {% if data['payment'] == "cash" %}
+                        현금
+                        {% endif %}
+                        {% if data['payment'] == "point" %}
+                        포인트
+                        {% endif %}
+                        {% if data['payment'] == "other" %}
+                        기타
+                        {% endif %}
+                    </p>
+                    <p><strong>내용:</strong> {{ data.content }}</p>
                 </div>
             </div>
         </section>
     </div>
+</body>
+
 {% endblock section %}
