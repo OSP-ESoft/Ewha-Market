@@ -23,15 +23,15 @@
       <tr>
         {% for key, value in row.items() %}
         <td onclick="location.href='/view_detail/{{key}}/';" style="cursor:pointer;">
-          <img src="static/images/{{value.img_path}}" width=140 height=200>
+          <img src="static/images/{{value.img_path}}">
         </td>
         {% endfor %}
       </tr>
-      <tr>
+      <th>
         {% for key, value in row.items() %}
         <td>{{key}}</td>
         {% endfor %}
-      </tr>
+      </th>
       {% endfor %}
     </table>
     {% else %}
