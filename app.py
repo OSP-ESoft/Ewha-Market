@@ -77,7 +77,19 @@ def view_list():
 
     item_counts = len(data)
     data = dict(list(data.items())[start_idx:end_idx])
-    print(data)
+
+    def format_price(price):
+        # 가격 데이터 형식 통일
+        try:
+            price = int(price)  
+            return f"{price:,.0f}원"  
+        except ValueError:
+            return price 
+
+    # 가격 포맷팅 적용
+    for key, value in data.items():
+        if "price" in value:
+            value["price"] = format_price(value["price"])
 
     total_count = len(data)
     rows = []  # 상품을 row 단위로 나누어 저장할 리스트
