@@ -1,7 +1,8 @@
-from flask import Flask, render_template, request, flash, session, redirect,url_for,jsonify
+from flask import Flask, render_template, request, flash, session, redirect, url_for, jsonify
 from database import DBhandler
 import sys
 import hashlib
+import math
 from datetime import datetime 
 application = Flask(__name__)
 application.config["SECRET_KEY"] = "ABCD"
@@ -64,19 +65,27 @@ def register():
 @application.route("/list")
 def view_list():
     page = request.args.get("page", 1, type=int)
-
+    category = request.args.get("category", None)
     per_page = 10
     per_row = 5
     row_count = int(per_page/per_row)
-
-    #보여줄 페이지의 첫/마지막 상품 인덱스
-    start_idx = per_page*(page-1)
+    start_idx = per_page*(page-1) #보여줄 페이지의 첫/마지막 상품 인덱스
     end_idx = per_page*(page)
 
-    data = DB.get_items() #read table
+    if not category:
+        data = DB.get_items() #read table
+    else:
+        print(f"Selected category: {category}") #디버깅용
+        data = DB.get_items_bycategory(category)
 
+    data = dict(sorted(data.items(), key=lambda x: x[0], reverse=False)) #x[0] == key, x[1]['속성값'] == value
+    print(f"Sorted data : {data}") #디버깅용
     item_counts = len(data)
-    data = dict(list(data.items())[start_idx:end_idx])
+
+    if item_counts<=per_page:
+        data = dict(list(data.items())[:item_counts])
+    else:
+        data = dict(list(data.items())[start_idx:end_idx])
 
     def format_price(price):
         # 가격 데이터 형식 통일
@@ -92,23 +101,34 @@ def view_list():
             value["price"] = format_price(value["price"])
 
     total_count = len(data)
-    rows = []  # 상품을 row 단위로 나누어 저장할 리스트
+    # rows = []  # 상품을 row 단위로 나누어 저장할 리스트
 
     for i in range(row_count):
         if (i == row_count - 1) and (total_count % per_row != 0):  # 마지막 줄
-            rows.append(dict(list(data.items())[i * per_row:])) 
+            locals()['data_{}'.format(i)] = dict(list(data.items())[i*per_row:])
+            # rows.append(dict(list(data.items())[i * per_row:])) 
         else:
-            rows.append(dict(list(data.items())[i * per_row:(i + 1) * per_row]))
+            locals()['data_{}'.format(i)] = dict(list(data.items())[i*per_row:(i+1)*per_row])
+            # rows.append(dict(list(data.items())[i * per_row:(i + 1) * per_row]))
+
+    row1=locals()['data_0'].items()
+    row2=locals()['data_1'].items()
+
+    rows = [row1, row2]
 
     print(rows, type(rows))
     return render_template(
         "list.html",
-        # datas = data.items(),
+        datas = data.items(),
+        row1=locals()['data_0'].items(),
+        row2=locals()['data_1'].items(),
         rows = rows,
         limit = per_page,
         page = page,
-        page_count = int((item_counts/per_page)+1),
-        total = item_counts)
+        page_count=int(math.ceil(item_counts/per_page)),
+        # page_count = int((item_counts/per_page)+1),
+        total = item_counts,
+        category=category)
 
 @application.route("/view_detail/<name>/")
 def view_detail(name):

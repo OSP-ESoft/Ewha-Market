@@ -79,6 +79,7 @@ class DBhandler:
     # item
     def get_items(self):
         items = self.db.child("item").get().val()
+        # print(f"Retrieved items: {items}") #데이터 확인
         return items
     
     def insert_item(self, title, data, user_id, img_path):
@@ -91,6 +92,7 @@ class DBhandler:
             "payment" : data["payment"],
             "condition": data['condition'],
             "description" : data["description"],
+            "category" : data['category'],
             "img_path": img_path
         }
         self.db.child("item").child(title).set(item_info)
@@ -107,6 +109,24 @@ class DBhandler:
             if key_value == name:
                 target_value = res.val()
         return target_value
+
+    def get_items_bycategory(self, cate):
+        items = self.db.child("item").get()
+        target_value=[]
+        target_key=[]
+        for res in items.each():
+            value = res.val()
+            key_value = res.key()
+            # if value['category'] == cate:
+            if 'category' in value and value['category'] == cate: #value가 category를 가지고 있는지 검토
+                target_value.append(value)
+                target_key.append(key_value)
+        # print("######target_value",target_value)
+        print(f"Filtered items for category {cate}: {target_value}") #디버깅용
+        new_dict={}
+        for k,v in zip(target_key,target_value):
+            new_dict[k]=v
+        return new_dict
     
     # group
     def get_groups(self):
