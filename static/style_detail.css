@@ -98,9 +98,24 @@ body {
     margin: 10px 0;
 }
 
-.highlight {
-    color: #28a745;
+#item-status span {
     font-weight: bold;
+}
+
+#item-status span.green{
+    color: #28a745;
+}
+#item-status span.lightGreen{
+    color: #87a728;
+}
+#item-status span.yellow{
+    color: #c1c122;
+}
+#item-status span.orange{
+    color: #bb5a1e;
+}
+#item-status span.red {
+    color: #a73928;
 }
 
 .buy_btn {
