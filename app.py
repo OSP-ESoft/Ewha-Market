@@ -298,6 +298,14 @@ def view_group_detail(title):
     data = DB.get_group_bytitle(str(title))
     print("####data:",data)
     return render_template("detail_group.html", title=title, data=data)
+    
+#마이페이지
+@application.route("/mypage")
+def mypage():
+    user_id = session['id']
+    user_data = DB.get_user_by_data(str(user_id))
+    print(user_data)
+    return render_template("mypage.html", data=user_data)
 
 
 #좋아요 관련 기능
