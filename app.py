@@ -38,10 +38,6 @@ def logout():
     return render_template("index.html")
    
 
-@application.route("/mypage")
-def mypage():
-    return render_template("mypage.html")
-
 #회원가입
 @application.route("/registerpage")
 def registerpage():
