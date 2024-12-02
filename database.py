@@ -47,7 +47,8 @@ class DBhandler:
             if value['id'] == id_ and value['pw'] == pw_:
                 return True
         return False
-#mypage
+    
+    #mypage
     def get_user_by_data(self,user_id):
         datas = self.db.child("user").get()
         for res in datas.each():
@@ -55,13 +56,23 @@ class DBhandler:
             if user_data.get("id") == user_id:
                 return user_data
         return None
-    
 
     #review 
-    def get_reviews(self):
-         reviews = self.db.child("review").get().val()
-         return reviews
-
+    def get_reviews(self, sort_by="recent"):
+        reviews = self.db.child("review").get().val()
+        if sort_by == "recent":
+            sorted_reviews = dict(sorted(reviews.items(), key=lambda x: x[1].get("date", ""), reverse=True))
+        elif sort_by == "high":
+            # 별점 높은 순 정렬
+            sorted_reviews = dict(sorted(reviews.items(), key=lambda x: int(x[1].get("rating", 0)), reverse=True))
+        elif sort_by == "low":
+            # 별점 낮은 순 정렬
+            sorted_reviews = dict(sorted(reviews.items(), key=lambda x: int(x[1].get("rating", 0))))
+        else:
+            # 기본 정렬: 변경 없음
+            sorted_reviews = reviews
+        return sorted_reviews
+    
     def insert_review(self, title, data, img_path,user_id):
         review_info = {
             "writer": user_id,

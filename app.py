@@ -77,7 +77,6 @@ def view_list():
     data = dict(sorted(data.items(), key=lambda x: x[0], reverse=False)) #x[0] == key, x[1]['속성값'] == value
     print(f"Sorted data : {data}") #디버깅용
     item_counts = len(data)
-
     if item_counts<=per_page:
         data = dict(list(data.items())[:item_counts])
     else:
@@ -148,6 +147,13 @@ def reg_item_submit():
 
 #리뷰 및 상세 리뷰
 @application.route("/reg_reviews", methods=["GET", "POST"])
+def reg_review():
+    id_ = session.get('id', None)
+    if not id_:
+        flash("로그인하십시오.")
+        return redirect("/loginpage")
+    else:
+        return render_template("reg_reviews.html")
 def reg_reviews():
     if request.method == "POST":
         try:
@@ -200,12 +206,14 @@ def reg_reviews():
 @application.route("/review")
 def view_review():
     page = request.args.get("page", 1, type=int)
+    sort_by = request.args.get("sort", "recent")
     per_page = 10
     per_row = 5
     row_count = int(per_page/per_row)
     start_idx = per_page*(page-1)
     end_idx = per_page*(page)
-    data = DB.get_reviews() 
+    data = DB.get_reviews(sort_by=sort_by)
+
     item_counts = len(data)
     data = dict(list(data.items())[start_idx:end_idx])
     total_count = len(data)
@@ -294,7 +302,7 @@ def view_group_detail(title):
     data = DB.get_group_bytitle(str(title))
     print("####data:",data)
     return render_template("detail_group.html", title=title, data=data)
-    
+
 #마이페이지
 @application.route("/mypage")
 def mypage():
@@ -302,7 +310,6 @@ def mypage():
     user_data = DB.get_user_by_data(str(user_id))
     print(user_data)
     return render_template("mypage.html", data=user_data)
-
 
 #좋아요 관련 기능
 @application.route('/show_heart/<name>/', methods=['GET'])
@@ -331,14 +338,8 @@ def reg_item():
     else:
         return render_template("reg_items.html")
 
-@application.route("/reg_reviews")
-def reg_review():
-    id_ = session.get('id', None)
-    if not id_:
-        flash("로그인하십시오.")
-        return redirect("/loginpage")
-    else:
-        return render_template("reg_reviews.html")
+# @application.route("/reg_reviews")
+
 
 @application.route("/reg_groups")
 def reg_group():
