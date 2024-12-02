@@ -14,6 +14,8 @@ body {
 
 /* 사이드바 스타일 */
 .sidebar {
+    text-align: center;
+    /* text-decoration: underline; */
     width: 200px;
     padding: 20px;
     background-color: #e9ecef;
@@ -32,15 +34,19 @@ body {
 
 .category_btn button {
     display: block;
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: none;
-    border-radius: 5px;
+    text-align: center;
+    width: 200px;
+    height: 25px;
+    padding: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 1.5px solid #006937;
+    border-radius: 7px;
     background-color: #ffffff;
     cursor: pointer;
-    font-size: 1em;
-    text-align: left;
+    transition: all 0.1s ease;
+    font-size: 17px;
+
 }
 
 .category_btn .active {
@@ -59,15 +65,15 @@ body {
 
 .back-link {
 
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 
 }
 .back-link a {
     color: black;
     font-family:Arial, Helvetica, sans-serif;
-    font-weight:bold;
+    /* font-weight:bold; */
     text-decoration: none;
-    font-size: 1.4em;
+    font-size: 1.2em;
 }
 
 .back-link a:hover {

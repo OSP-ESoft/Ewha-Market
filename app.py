@@ -19,7 +19,7 @@ def loginpage():
 
 @application.route("/login", methods=['POST'])
 def login():
-    flash("로그인")
+    flash("로그인 완료!")
     id_=request.form['id']
     pw=request.form['pw']
     pw_hash = hashlib.sha256(pw.encode('utf-8')).hexdigest()
@@ -303,6 +303,9 @@ def view_group_detail(title):
 #좋아요 관련 기능
 @application.route('/show_heart/<name>/', methods=['GET'])
 def show_heart(name):
+    if 'id' not in session:
+        return redirect("/loginpage")
+
     my_heart = DB.get_heart_byname(session['id'],name)
     return jsonify({'my_heart': my_heart})
 
