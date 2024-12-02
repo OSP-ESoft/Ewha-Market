@@ -38,8 +38,12 @@
             <p onclick="location.href='/view_group_detail/{{key}}/';" style="cursor:pointer;">
                 {{key}}
             </p>
-            <div class="status-button">{{value.status}}</div>
-            </div>
+            {% if value['status'] == "모집중" %}
+              <div class="status-button">{{value.status}}</div>
+            {% elif value['status'] == "모집마감" %} 
+              <div class="closed-status-button">{{value.status}}</div>
+            {% endif %}
+          </div>
           {% endfor %}
         
         {% endfor %}

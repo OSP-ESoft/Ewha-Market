@@ -11,40 +11,43 @@
   </div>
     <!-- 네비게이션 바 아래 상품 분류 필터부터 구현 -->
     <div class="category_btn">
-        <button class="daily_products" data-filter="daily_products" onclick="loadProducts('생활용품')">
-          생활용품
-        </button>
-        <button class="books" data-filter="books" onclick="loadProducts('책')">
-          책
-        </button>
-        <button class="ewha_goods" data-filter="ewha_goods" onclick="loadProducts('이화 굿즈')">
-          이화 굿즈
-        </button>
+      <button class="daily_products" data-filter="daily_products"
+      onclick="location.href='{{url_for('view_list', page=i, category='daily_products')}}';">
+      생활용품
+    </button>
+    <button class="books" data-filter="books"
+      onclick="location.href='{{ url_for('view_list', category='books', page=i) }}';">
+      책
+    </button>
+    <button class="ewha_goods" data-filter="ewha_goods"
+      onclick="location.href='{{ url_for('view_list', category='ewha_goods', page=i) }}';">
+      이화 굿즈
+    </button>
     </div>
 
 
     
-    <div class="product-grid" id="products">
+    <div class="product-container" id="products">
     {% if total > 0 %}
-      <p>상품 총 {{total}}개</p> 
       <table>
         {% for row in rows%}
         <tr>
-          {% for key, value in row.items() %}
+          {% for key, value in row %}
             <td onclick="location.href='/view_detail/{{key}}/';" style="cursor:pointer;">
-            <img src="static/images/{{value.img_path}}" width=140 height=200>
+            <img src="static/images/{{value.img_path}}" alt="{{key}}">
+            <div class="product-title" data-title="{{key}}">
+              {{key}}
+            </div>
+            <div class="product-price">가격: {{ value.price }}</div>
             </td>
-          {% endfor %}
-        </tr>
-        <tr>
-          {% for key, value in row.items() %}
-          <td>{{key}}</td>
           {% endfor %}
         </tr>
         {% endfor %}
       </table>
     {% else %}
+    <div class="none">
       <p>등록된 상품이 없습니다.</p>
+    </div>
     {% endif %}
     </div>
     
@@ -62,6 +65,23 @@
     
     
 
-    <script src="{{ url_for('static', filename='products.js') }}"></script>
+    <script>
+      // 버튼 클릭 시 active 클래스 추가/삭제
+      document.addEventListener("DOMContentLoaded", function () {
+        const buttons = document.querySelectorAll(".category_btn button");
+  
+        buttons.forEach(button => {
+          button.addEventListener("click", function () {
+            if (this.classList.contains("active")) {
+              this.classList.remove("active");
+            }
+            else {
+              buttons.forEach(btn => btn.classList.remove("active"));
+              this.classList.add("active");
+            }
+          });
+        });
+      });
+    </script>
 </body>
 {% endblock section %}

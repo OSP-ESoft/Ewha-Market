@@ -16,7 +16,7 @@ a {
 #header {
     font-weight: bold;
     background-color: #006937;
-    padding: 20px 0;
+    padding: 10px 0;
     position: relative;
     overflow: hidden;
     white-space: nowrap;
@@ -24,7 +24,7 @@ a {
 
 #header .container {
     width: 1120px; 
-    height: 189px;
+    height: 160px;
     margin: 0 auto;
 
 }
@@ -41,7 +41,8 @@ a {
     position: absolute;
     display: flex;
     right: 5%;     
-    gap: 30px
+    gap: 30px;
+    padding-top: 13px;
 
 }
 
@@ -54,8 +55,8 @@ a {
     position: absolute;
     display: flex;
     justify-content: center;
-    gap: 80px;
-    top: 160px;
+    gap: 40px;
+    top: 110px;
     width: 100%;
 }
 
@@ -63,7 +64,10 @@ a {
     position: relative;
     color: #fff;
     font-size: 30px;
-    padding: 20px 60px;
+    padding-top: 15px;
+    padding-bottom:30px;
+    padding-left:60px;
+    padding-right: 60px;
     transition: background-color 0.3s ease;
     border-radius: 8px;
 }

@@ -1,7 +1,10 @@
-from flask import Flask, render_template, request, flash, session, redirect
+from flask import Flask, render_template, request, flash, session, redirect, url_for, jsonify
 from database import DBhandler
 import sys
 import hashlib
+import math
+from datetime import datetime 
+
 application = Flask(__name__)
 application.config["SECRET_KEY"] = "ABCD"
 DB = DBhandler()
@@ -55,9 +58,11 @@ def register():
         flash("중복되는 아이디입니다.")
         return render_template("registerpage.html")
 
+#상품 목록
 @application.route("/list")
 def view_list():
     page = request.args.get("page", 1, type=int)
+    category = request.args.get("category", None)
 
     per_page = 10
     per_row = 5
@@ -67,20 +72,47 @@ def view_list():
     start_idx = per_page*(page-1)
     end_idx = per_page*(page)
 
-    data = DB.get_items() #read table
+    if not category:
+        data = DB.get_items() #read table
+    else:
+        print(f"Selected category: {category}") #디버깅용
+        data = DB.get_items_bycategory(category)
+
+    data = dict(sorted(data.items(), key=lambda x: x[0], reverse=False)) #x[0] == key, x[1]['속성값'] == value
+    print(f"Sorted data : {data}") #디버깅용
 
     item_counts = len(data)
-    data = dict(list(data.items())[start_idx:end_idx])
-    print(data)
+
+    if item_counts<=per_page:
+        data = dict(list(data.items())[:item_counts])
+    else:
+        data = dict(list(data.items())[start_idx:end_idx])
+    
+    def format_price(price):
+        # 가격 데이터 형식 통일
+        try:
+            price = int(price)  
+            return f"{price:,.0f}원"  
+        except ValueError:
+            return price 
+
+    # 가격 포맷팅 적용
+    for key, value in data.items():
+        if "price" in value:
+            value["price"] = format_price(value["price"])
 
     total_count = len(data)
-    rows = []  # 상품을 row 단위로 나누어 저장할 리스트
 
     for i in range(row_count):
         if (i == row_count - 1) and (total_count % per_row != 0):  # 마지막 줄
-            rows.append(dict(list(data.items())[i * per_row:])) 
+            locals()['data_{}'.format(i)] = dict(list(data.items())[i*per_row:])
         else:
-            rows.append(dict(list(data.items())[i * per_row:(i + 1) * per_row]))
+            locals()['data_{}'.format(i)] = dict(list(data.items())[i*per_row:(i+1)*per_row])
+
+    row1=locals()['data_0'].items()
+    row2=locals()['data_1'].items()
+
+    rows = [row1, row2]
 
     print(rows, type(rows))
     return render_template(
@@ -89,14 +121,11 @@ def view_list():
         rows = rows,
         limit = per_page,
         page = page,
-        page_count = int((item_counts/per_page)+1),
+        page_count = int(math.ceil(item_counts/per_page)),
+        #page_count = int((item_counts/per_page)+1),
         total = item_counts)
 
-#상세페이지 라우팅
-@application.route('/dynamicurl/<varible_name>/')
-def DynamicUrl(varible_name):
-    return str(varible_name)
-
+#상품 상세페이지 라우팅
 @application.route("/view_detail/<name>/")
 def view_detail(name):
     print("###name:",name)
@@ -104,6 +133,7 @@ def view_detail(name):
     print("####data:",data)
     return render_template("detail.html", name=name, data=data)
 
+#그룹 목록
 @application.route("/group")
 def view_group():
     page = request.args.get("page", 1, type=int)
@@ -150,14 +180,55 @@ def view_group_detail(title):
     print("####data:",data)
     return render_template("detail_group.html", title=title, data=data)
 
+#리뷰 목록
 @application.route("/review")
 def view_review():
-    return render_template("review.html")
+    page = request.args.get("page", 1, type=int)
+    per_page = 10
+    per_row = 5
 
-@application.route("/detail_review")
-def view_detail_review():
-    return render_template("detail_review.html")
+    row_count = int(per_page/per_row)
+    start_idx = per_page*(page-1)
+    end_idx = per_page*(page)
 
+    data = DB.get_reviews() 
+    if data:
+        item_counts = len(data)
+        data = dict(list(data.items())[start_idx:end_idx])
+        total_count = len(data)
+        rows = []  
+        for i in range(row_count):
+            if (i == row_count - 1) and (total_count % per_row != 0):  # 마지막 줄
+                rows.append(dict(list(data.items())[i * per_row:])) 
+            else:
+                rows.append(dict(list(data.items())[i * per_row:(i + 1) * per_row]))
+    
+        return render_template(
+            "review.html",
+            datas = data.items(),
+            rows = rows,
+            limit = per_page,
+            page = page,
+            page_count = int((item_counts/per_page)+1),
+            total = item_counts)
+    else:
+        return render_template(
+            "review.html",
+            # datas = data.items(),
+            rows = 0,
+            limit = 0,
+            page = page,
+            page_count = 1,
+            total = 0)
+
+@application.route("/view_detail_review/<title>/")
+def view_detail_review(title):
+    print("###name:",title)
+    data = DB.get_review_bytitle(str(title))
+    print("####data:",data)
+    return render_template("detail_review.html",title=title,data=data)
+
+#상품 등록
 @application.route("/reg_items")
 def reg_item():
     id_ = session.get('id', None)
@@ -167,6 +238,63 @@ def reg_item():
     else:
         return render_template("reg_items.html")
 
+#리뷰 및 상세 리뷰
+@application.route("/reg_reviews", methods=["GET", "POST"])
+def reg_reviews():
+    if request.method == "POST":
+        try:
+            # POST 요청 처리 (데이터 저장)
+            data = request.form.to_dict()
+            image_file = request.files.get("file")
+
+            # 기본 값 설정
+            product = data.get("product", "")
+            title = data.get("title", "")
+            content = data.get("content", "")
+            payment = data.get("payment", "")
+            rating = data.get("rating", "0")
+
+            # 필수 입력값 체크
+            if not product or not title:
+                flash("상품명과 제목은 필수 항목입니다.")
+                return render_template("reg_reviews.html")
+
+            # 이미지 파일 처리
+            if image_file and image_file.filename != "":
+                image_path = f"static/images/{image_file.filename}"
+                image_file.save(image_path)
+            else:
+                # 기본 이미지 경로 설정
+                image_path = "/static/images/default.jpg"
+
+            # Firebase DB 저장
+            review_data = {
+                "product": product,
+                "title": title,
+                "content": content,
+                "payment": payment,
+                "rating": rating,
+                "image": f"/{image_path}",  # 경로에 "/"를 추가하여 Flask static 경로와 일치시킴
+                "date": datetime.now().strftime("%Y-%m-%d"),
+            }
+            DB.db.child("review").child(title).set(review_data)
+
+            flash("리뷰가 성공적으로 등록되었습니다!")
+            return redirect(url_for("view_review"))
+        except Exception as e:
+            print(f"Error: {e}")
+            flash("리뷰 등록 중 오류가 발생했습니다.")
+            return render_template("reg_reviews.html")
+    else:
+        # GET 요청 처리 (리뷰 등록 페이지 렌더링)
+        return render_template("reg_reviews.html")
+
+#리뷰 등록
+@application.route("/reg_reviews_init/<name>/")
+def reg_reviews_init(name):
+ return render_template("reg_reviews.html", name=name)
+
+'''
 @application.route("/reg_reviews")
 def reg_review():
     id_ = session.get('id', None)
@@ -175,7 +303,8 @@ def reg_review():
         return redirect("/loginpage")
     else:
         return render_template("reg_reviews.html")
-
+'''
+#그룹 등록
 @application.route("/reg_groups")
 def reg_group():
     id_ = session.get('id', None)
@@ -205,6 +334,36 @@ def reg_group_submit():
 
     title = data['title']
 
+    return view_group_detail(title)
+
+
+#좋아요 관련 기능
+@application.route('/show_heart/<name>/', methods=['GET'])
+def show_heart(name):
+    my_heart = DB.get_heart_byname(session['id'],name)
+    return jsonify({'my_heart': my_heart})
+
+@application.route('/like/<name>/', methods=['POST'])
+def like(name):
+    my_heart = DB.update_heart(session['id'],'Y',name)
+    return jsonify({'msg': '좋아요 완료!'})
+
+@application.route('/unlike/<name>/', methods=['POST'])
+def unlike(name):
+    my_heart = DB.update_heart(session['id'],'N',name)
+    return jsonify({'msg': '좋아요 해제 완료!'})
+
+#그룹 모집 상태 변경
+@application.route('/group_close/<title>/', methods=['GET'])
+def group_closing(title):
+    DB.update_group_status(title, 0)
+    flash("모집 마감되었습니다.")
+    return view_group_detail(title)
+
+@application.route('/group_open/<title>/', methods=['GET'])
+def group_opening(title):
+    DB.update_group_status(title, 1)
+    flash("모집 시작했습니다.")
     return view_group_detail(title)
 
 '''
