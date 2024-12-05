@@ -206,16 +206,18 @@ def reg_reviews():
 @application.route("/review")
 def view_review():
     page = request.args.get("page", 1, type=int)
-    sort_by = request.args.get("sort", "recent")
+
     per_page = 10
     per_row = 5
     row_count = int(per_page/per_row)
     start_idx = per_page*(page-1)
     end_idx = per_page*(page)
+    
+    sort_by = request.args.get("sort", "recent")
     data = DB.get_reviews(sort_by=sort_by)
-
-    item_counts = len(data)
     data = dict(list(data.items())[start_idx:end_idx])
+    item_counts = len(data)
+
     total_count = len(data)
     rows = []  
     for i in range(row_count):
