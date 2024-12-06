@@ -7,6 +7,7 @@ body {
 
 /* 메인 컨텐츠 레이아웃 */
 .container {
+
     display: flex;
     margin: 40px;
     font-size: 18px;
@@ -26,9 +27,11 @@ body {
 /* 상품 상세 정보 스타일 */
 .item-detail {
     flex-grow: 1;
-    padding: 30px;
+    padding: 50px;
     background-color: #ffffff;
     border-radius: 8px;
+    width: 90%;
+    margin: 0 auto;
 }
 
 .back-link {
@@ -41,7 +44,7 @@ body {
     font-family:Arial, Helvetica, sans-serif;
     font-weight:bold;
     text-decoration: none;
-    font-size: 40px;
+    font-size: 30px;
 }
 
 .back-link a:hover {
@@ -49,30 +52,32 @@ body {
 }
 
 .item-info {
-    margin-top: 70px;
+    margin-left: 130px;
+    margin-top: 90px;
     display: flex;
     gap: 20px;
     
 }
 
 .item-image img {
-    width: 400px;
-    height: 400px;
+    width: 300px;
+    height: 300px;
     object-fit: cover;
     border-radius: 8px;
 }
 
 .item-description {
+    margin-left: 30px;
     max-width: 500px;
 }
 
 .item-description h1 {
-    font-size: 1.8em;
+    font-size: 2.0em;
     margin-bottom: 10px;
 }
 
 .item-description p {
-    margin: 20px 0px;
+    margin: 30px 0px;
 }
 
 .highlight {
@@ -80,19 +85,4 @@ body {
     font-weight: bold;
 }
 
-.buy_btn {
-    background-color: #006400;
-    color: white;
-    border: none;
-    padding: 13px;
-    border-radius: 30px;
-    cursor: pointer;
-    min-width: 25px;
-    min-height: 15px;
-    font-size: 1em;
-}
 
-.buy_btn:hover {
-    background-color: #004d00;
-
-}
