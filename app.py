@@ -154,14 +154,13 @@ def reg_item_submit():
 
 #리뷰 및 상세 리뷰
 @application.route("/reg_reviews", methods=["GET", "POST"])
-def reg_review():
+def reg_reviews():
     id_ = session.get('id', None)
+
     if not id_:
         flash("로그인하십시오.")
         return redirect("/loginpage")
-    else:
-        return render_template("reg_reviews.html")
-def reg_reviews():
+    
     if request.method == "POST":
         try:
             # POST 요청 처리 (데이터 저장)
