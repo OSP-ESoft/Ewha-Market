@@ -59,7 +59,14 @@ def register():
     else:
         flash("중복되는 아이디입니다.")
         return render_template("registerpage.html")
-
+        
+#마이페이지
+@application.route("/mypage")
+def mypage():
+    user_id = session['id']
+    user_data = DB.get_user_by_data(str(user_id))
+    print(user_data)
+    return render_template("mypage.html", data=user_data)
 
 #상품리스트 및 상품 상세
 @application.route("/list")
