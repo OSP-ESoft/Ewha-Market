@@ -157,46 +157,17 @@ def reg_reviews_init(name):
  return render_template("reg_reviews.html", name=name)
 
 #구매하기 버튼
-# @application.route('/get_seller_info', methods=['POST'])
-# def get_seller_info():
-#     seller_id = request.json.get("seller_id")
-#     seller_info = DB.get_seller_info(seller_id)
-#     if seller_info:
-#         return jsonify({
-#             "success": True,
-#             "email": seller_info["email"],
-#             "phone": seller_info["phone"]
-#         })
-#     else:
-#         return jsonify({"success": False, "message": "판매자 정보를 찾을 수 없습니다."}), 404
-    
-# @application.route('/get_seller_by_item/<name>/', methods=['GET'])
-# def get_seller_by_item(name):
-#     seller_id = DB.get_seller_by_item_name(name)
-#     if seller_id:
-#         return jsonify({"success": True, "seller_id": seller_id})
-#     else:
-#         return jsonify({"success": False, "message": "해당 상품을 찾을 수 없습니다."}), 404
-
-
-
-@application.route('/get_seller_by_item/<name>/', methods=['GET'])
 @application.route('/get_seller_by_item/<name>/', methods=['GET'])
 def get_seller_by_item(name):
-    # 로그 추가: 상품 이름 확인
-    print(f"### 상품 이름: {name}")
 
-    # 1. 상품 이름을 통해 판매자 ID를 가져옴
     seller_id = DB.get_seller_by_item_name(name)
     
     if seller_id:
-        # 2. 판매자 ID로 이메일과 전화번호 정보 가져오기
         seller_info = DB.get_sellerInfo_by_id(seller_id)
         
-        print(f"### 판매자 정보: {seller_info}")  # seller_info가 None이 아닌지 확인
+        print(f"### 판매자 정보: {seller_info}")
         
         if seller_info:
-            # 3. 판매자 정보가 있을 경우 반환
             return jsonify({
                 "success": True,
                 "seller_id": seller_id,
