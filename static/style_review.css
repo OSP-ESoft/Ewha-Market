@@ -1,7 +1,7 @@
-
 .info{
     font-weight: bold;
     padding: 40px 0px 10px 0px;
+    margin-bottom: 20px;
 }
 
 .review{
@@ -16,21 +16,28 @@
    right: 15%;
 }
 .sort button{
-    border:0;
-    margin: 0 10px;
-    padding: 0 0 5px 0;
+    border:1px;
+    padding: 10px 20px;
     background-color: transparent;
     font-size: 20px;
+        cursor: pointer;
     color:#006937;
     font-weight: bold;
 }
 .body{
+    margin-top: 30px;
     position: relative;
     width:1500px;
     height: 700px;
     margin: auto;
 }
-
+.reviewtitle {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 210px; 
+}
 
 .goodlst ol li{
     float:left;
@@ -103,3 +110,20 @@
     text-decoration: none;
     font-weight:bold;
    }
+   .write_btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 150px;
+    height: 50px;
+
+    background-color: #006937;
+    border-width: 1.5px;
+    border-style: solid;
+    border-radius: 7px;
+
+    font-size: 17px;
+    text-align: center;
+    color: white;
+    padding-top: 12px;
+}
