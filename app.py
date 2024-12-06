@@ -152,6 +152,13 @@ def reg_item_submit():
 
 #리뷰 및 상세 리뷰
 @application.route("/reg_reviews", methods=["GET", "POST"])
+def reg_review():
+    id_ = session.get('id', None)
+    if not id_:
+        flash("로그인하십시오.")
+        return redirect("/loginpage")
+    else:
+        return render_template("reg_reviews.html")
 def reg_reviews():
     if request.method == "POST":
         try:
@@ -204,14 +211,18 @@ def reg_reviews():
 @application.route("/review")
 def view_review():
     page = request.args.get("page", 1, type=int)
+
     per_page = 10
     per_row = 5
     row_count = int(per_page/per_row)
     start_idx = per_page*(page-1)
     end_idx = per_page*(page)
-    data = DB.get_reviews() 
-    item_counts = len(data)
+    
+    sort_by = request.args.get("sort", "recent")
+    data = DB.get_reviews(sort_by=sort_by)
     data = dict(list(data.items())[start_idx:end_idx])
+    item_counts = len(data)
+
     total_count = len(data)
     rows = []  
     for i in range(row_count):
@@ -239,6 +250,7 @@ def view_detail_review(title):
 @application.route("/reg_reviews_init/<name>/")
 def reg_reviews_init(name):
  return render_template("reg_reviews.html", name=name)
+
 
 
 #그룹 및 상세 그룹
