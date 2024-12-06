@@ -12,17 +12,17 @@
         <aside class="sidebar">
             <h2>상품 카테고리</h2>
             <ul class="category_btn">
-                <li><button class = "ott" onclick="location.href='{{url_for('view_group', page=i, category='OTT')}}';">OTT</button></li>
-                <li><button class = "study" onclick="location.href='{{url_for('view_group', page=i, category='스터디')}}';">스터디</button></li>
-                <li><button class = "delivery" onclick="location.href='{{url_for('view_group', page=i, category='배달')}}';">배달</button></li>
-                <li><button class = "workout" onclick="location.href='{{url_for('view_group', page=i, category='운동')}}';">운동</button></li>
+                <li><button class="ott" onclick="location.href='{{url_for('view_group', page=i, category='OTT')}}';">OTT</button></li>
+                <li><button class="study" onclick="location.href='{{url_for('view_group', page=i, category='스터디')}}';">스터디</button></li>
+                <li><button class="delivery" onclick="location.href='{{url_for('view_group', page=i, category='배달')}}';">배달</button></li>
+                <li><button class="workout" onclick="location.href='{{url_for('view_group', page=i, category='운동')}}';">운동</button></li>
             </ul>
         </aside>
 
         <!-- 상품 상세 정보 -->
         <section class="item-detail">
             <div class="back-link">
-                <a href="{{url_for('view_group',page=i)}}">← {{data.category}}</a>
+                <a href="{{url_for('view_group', page=i, category=data['category']))}}">← {{data.category}}</a>
             </div>
             <div class="item-info">
                 <div class="item-description">
