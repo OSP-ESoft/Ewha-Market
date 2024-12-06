@@ -11,14 +11,14 @@
     <div class="container">
         <section class="item-detail">
             <div class="back-link">
-                <a href="{{url_for('view_review',page=i)}}">← {{title}}</a>
+                <a href="{{url_for('view_review',page=i)}}">← 이전으로 </a>
             </div>
             <div class="item-info">
                 <div class="item-image">
                     <img src="{{ data.image }}" alt="Review Image">
                 </div>
                 <div class="item-description">
-                    <h1>{{ title }}</h1>
+                    <h1>제목: {{ title }}</h1>
                     <p>
                         <span class="stars">
                             {% for star in range(1, 6) %}
@@ -57,3 +57,4 @@
 </body>
 
 {% endblock section %}
+
