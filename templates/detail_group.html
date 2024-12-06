@@ -27,6 +27,13 @@
             <div class="item-info">
                 <div class="item-description">
                     <h1>{{title}}</h1>
+                    {% if data['writer'] == session['id']%}
+                        {% if data['status'] == "모집중" %}
+                            <button class="status_btn" onclick="location.href='/group_close/{{title}}/';" style="cursor:pointer;">모집 마감하기</button>
+                        {% elif data['status'] == "모집마감" %}
+                            <button class="status_btn" onclick="location.href='/group_open/{{title}}/';" style="cursor:pointer;">모집하기</button>
+                        {% endif %}
+                    {% endif %}
                     <p><strong>연락처 : </strong>{{data.phone}}</p><br>
                     <div class="description">{{data.description}}<br><br><br></div>
                     
