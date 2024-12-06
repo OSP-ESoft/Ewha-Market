@@ -9,49 +9,45 @@
 {% if total > 0 %}
 <div class="info">
     <div class="review">리뷰 총 {{total}}개</div>
-    <div class="sort">
+    <div class="category_btn">
         <button type="button" sort="recentlst" class="on" onclick="sortReviews('recent')">최신 순</button>
         <button type="button" sort="highlst" onclick="sortReviews('high')">별점 높은 순</button>
         <button type="button" sort="lowlst" onclick="sortReviews('low')">별점 낮은 순</button>
     </div>
 </div>
-<section class="body">
+<body>
+    <div class="product-container" id="products">
+    <table>
     {% for row in rows%}
-    <div class="goodlst">
-        <ol class="goods">
-            <!-- 동적으로 추가된 데이터 -->
+            <tr>
             {% for key, value in row.items()%}
-            <li>
-                <a onclick="location.href='/view_detail_review/{{key}}/';" style="cursor:pointer;">
-                    <img src="{{value.image}}" alt="상품" class="goods">
-                    <div class="reviews">
-                        <span class="reviewtitle">{{value.title}}</span>
-                    </div>
-                    <div class="date">
-                        <span class="registerdate">등록일자: {{ value.date }}</span>
-                    </div>
-                </a>
-            </li>
-            {% endfor %}
-            {% endfor %}
-
+                <td onclick="location.href='/view_detail_review/{{key}}/';" style="cursor:pointer;">
+                    <img src="{{value.image}}" alt="상품" >
+                    <div class="product-title" data-title="{{value.title}}"> {{value.title}} </div>
+                    <div class="product-price"> 등록일자: {{ value.date }} </div>
+                </td>
+                {% endfor %}
+              </tr>
+              {% endfor %}
+            </table>
             {% else %}
-            <p>등록된 상품이 없습니다.</p>
+            <p>등록된 리뷰가 없습니다.</p>
             {% endif %}
-</section>
+        </div>
 
 <div class="pagination" id="pagination">
-    <ul>
-        <li>
-            {% for i in range(1, page_count+1)%}
-            <a href="{{url_for('view_review', page=i)}}" color="black">{{i}}</a>
-            {% endfor %}
-        </li>
-    </ul>
-</div>
+    {% for i in range(1, page_count+1)%}
+    <li class="{% if i == page %}current-page{% endif %}">
+      <a href="{{url_for('view_review', page=i)}}" color="black">{{i}}</a>
+    </li>
+    {% endfor %}
+
+  </div>
+
 <div class="write_btn">
     <a href="/reg_reviews" class="register">리뷰 등록</a>
 </div>
+</body>
 <script>
     function sortReviews(sortBy) {
         const timestamp = new Date().getTime();
@@ -59,4 +55,21 @@
     }
 </script>
 
+  <script>
+    // 버튼 클릭 시 active 클래스 추가/삭제
+    document.addEventListener("DOMContentLoaded", function () {
+      const buttons = document.querySelectorAll(".category_btn button");
+
+      buttons.forEach(button => {
+        button.addEventListener("click", function () {
+          // 다른 버튼에서 active 클래스 제거
+          buttons.forEach(btn => btn.classList.remove("active"));
+          
+          // 현재 클릭한 버튼에 active 클래스 추가
+          this.classList.add("active");
+        });
+      });
+    });
+  </script>
 {% endblock section %}
+
