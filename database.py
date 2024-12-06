@@ -193,7 +193,8 @@ class DBhandler:
     # group
     def get_groups(self):
         groups = self.db.child("group").get().val()
-        return groups
+        data = sorted(groups.items(), key=lambda x:x[1]["status"], reverse=True)
+        return dict(data)
     
     def insert_group(self, title, data, user_id):
         group_info ={
