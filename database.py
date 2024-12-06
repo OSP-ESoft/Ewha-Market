@@ -146,6 +146,50 @@ class DBhandler:
             new_dict[k]=v
         return new_dict
     
+    #buy-popup
+    def get_seller_by_item_name(self, item_name):
+        item = self.db.child("item").child(item_name).get()
+
+    # item 데이터를 출력하여 어떤 값이 반환되는지 확인
+        print(f"### item.val(): {item.val()}")
+
+        if item.val():
+            return item.val().get("seller")
+        return None
+
+
+    
+    
+
+    
+    # def get_sellerInfo_by_id(self, seller_id): 
+    #     # Firebase에서 판매자 ID에 해당하는 사용자 정보 가져오기
+    #     seller_info = self.db.child("user").child(seller_id).get()
+
+    #     # 판매자 정보가 존재할 경우 email과 phone 반환
+    #     if seller_info.val():
+    #         seller_data = seller_info.val()
+    #         return {
+    #             "email": seller_data.get("email"),
+    #             "phone": seller_data.get("phone")
+    #         }
+    #     else:
+    #         return None  # 해당 판매자가 없을 경우 None 반환
+
+    def get_sellerInfo_by_id(self, seller_id):
+    # Firebase에서 모든 사용자 정보를 가져오기
+        all_users = self.db.child("user").get()
+
+    # 모든 사용자 정보에서 id가 seller_id와 일치하는 사용자를 찾음
+        for user_key, user_data in all_users.val().items():
+            if user_data.get("id") == seller_id:  # id가 seller_id와 일치하는지 확인
+                return {
+                    "email": user_data.get("email"),
+                    "phone": user_data.get("phone")
+                }
+    
+        return None  # 해당 판매자 ID를 가진 사용자가 없을 경우 None 반환
+
     # group
     def get_groups(self):
         groups = self.db.child("group").get().val()
