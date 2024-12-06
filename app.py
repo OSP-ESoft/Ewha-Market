@@ -394,6 +394,19 @@ def unlike(name):
     my_heart = DB.update_heart(session['id'],'N',name)
     return jsonify({'msg': '좋아요 해제 완료!'})
 
+#그룹 모집 상태 변경
+@application.route('/group_close/<title>/', methods=['GET'])
+def group_closing(title):
+    DB.update_group_status(title, 0)
+    flash("모집 마감되었습니다.")
+    return view_group_detail(title)
+
+@application.route('/group_open/<title>/', methods=['GET'])
+def group_opening(title):
+    DB.update_group_status(title, 1)
+    flash("모집 시작했습니다.")
+    return view_group_detail(title)
+
 
 #etc
 @application.route("/reg_items")
