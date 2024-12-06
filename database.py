@@ -148,6 +148,28 @@ class DBhandler:
             if key_value == title:
                 target_value = res.val()
         return target_value
+
+    def get_groups_bycategory(self, category):
+        items = self.db.child("group").get()
+        target_value=[]
+        target_key=[]
+
+        for res in items.each():
+            value = res.val()
+            key_value = res.key()
+            # if value['category'] == cate:
+            if 'category' in value and value['category'] == category: #value가 category를 가지고 있는지 검토
+                target_value.append(value)
+                target_key.append(key_value)
+        # print("######target_value",target_value)
+
+        print(f"Filtered items for category {category}: {target_value}") #디버깅용
+
+        new_dict={}
+        for k,v in zip(target_key,target_value):
+            new_dict[k]=v
+
+        return new_dict
     
     def update_group_status(self, title, flag):
         if flag == 0: #모집중에서 모집마감
