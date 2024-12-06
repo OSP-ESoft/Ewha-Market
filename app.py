@@ -137,6 +137,7 @@ def view_detail(name):
 @application.route("/group")
 def view_group():
     page = request.args.get("page", 1, type=int)
+    category = request.args.get("category", None)
 
     per_page = 10
 
@@ -144,7 +145,12 @@ def view_group():
     start_idx = per_page*(page-1)
     end_idx = per_page*(page)
 
-    data = DB.get_groups() #read table
+    if not category:
+        data = DB.get_groups() #read table
+    else:
+        print(f"Selected category: {category}") #디버깅용
+        data = DB.get_groups_bycategory(category)
+    
     d = []
     
     if data:
