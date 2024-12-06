@@ -341,14 +341,6 @@ def reg_item():
     else:
         return render_template("reg_items.html")
 
-@application.route("/reg_reviews")
-def reg_review():
-    id_ = session.get('id', None)
-    if not id_:
-        flash("로그인하십시오.")
-        return redirect("/loginpage")
-    else:
-        return render_template("reg_reviews.html")
 
 @application.route("/reg_groups")
 def reg_group():
