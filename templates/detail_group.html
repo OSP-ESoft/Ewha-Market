@@ -26,7 +26,7 @@
             </div>
             <div class="item-info">
                 <div class="item-description">
-                    <h1>{{title}}</h1>
+                    <h1 class="title">{{title}}</h1>
                     {% if data['writer'] == session['id']%}
                         {% if data['status'] == "모집중" %}
                             <button class="status_btn" onclick="location.href='/group_close/{{title}}/';" style="cursor:pointer;">모집 마감하기</button>
