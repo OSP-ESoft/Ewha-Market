@@ -13,20 +13,28 @@
         <aside class="sidebar">
             <h2>상품 카테고리</h2>
             <ul class="category_btn">
-                <li><button class="daily_products">생활용품</button></li>
-                <li><button class="books">책</button></li>
-                <li><button class="ewha_goods">이화 굿즈</button></li>
-                <li><button class="etc">기타</button></li>
+                <li><button class="daily_products" onclick="location.href='{{url_for('view_list', page=i, category='daily_products')}}';">
+                    생활용품</button></li>
+                <li><button class="books" onclick="location.href='{{url_for('view_list', page=i, category='books')}}';">
+                    책</button></li>
+                <li><button class="ewha_goods" onclick="location.href='{{url_for('view_list', page=i, category='daily_products')}}';">
+                    이화 굿즈</button></li>
             </ul>
         </aside>
 
         <!-- 상품 상세 정보 -->
         <section class="item-detail">
             <div class="back-link">
-                <a href="{{url_for('view_list',page=i)}}">← {{data.category}} - {{name}}</a>
-                <script>
-
-                </script>
+                <a href="{{url_for('view_list',page=i)}}">
+                    <!-- {% if data['category'] == "daily_products" %}
+                        ← 생활용품 - {{name}}
+                    {% elif data['category'] == "books" %}
+                        ← 책 - {{name}}
+                    {% else %}
+                        ← 이화 굿즈 - {{name}}
+                    {% endif %} -->
+                    ← 이전으로
+                </a>
             </div>
             <div class="item-info">
                 <div class="item-image">
