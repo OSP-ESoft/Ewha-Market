@@ -9,9 +9,20 @@ body {
 .container {
     display: flex;
     margin: 40px;
+    font-size: 18px;
 }
 
+.stars .fa-star {
+    color: #006937;
+    font-size: 2.2em;
+    margin-right: 2px;
+}
 
+.stars .fa-star-o {
+    color: lightgray; 
+    font-size: 2.2em;
+    margin-right: 2px;
+}
 /* 상품 상세 정보 스타일 */
 .item-detail {
     flex-grow: 1;
@@ -38,8 +49,10 @@ body {
 }
 
 .item-info {
+    margin-top: 70px;
     display: flex;
     gap: 20px;
+    
 }
 
 .item-image img {
@@ -59,7 +72,7 @@ body {
 }
 
 .item-description p {
-    margin: 10px 0px;
+    margin: 20px 0px;
 }
 
 .highlight {
