@@ -240,6 +240,12 @@ class DBhandler:
 
         data = sorted(new_dict.items(), key=lambda x:x[1]["status"], reverse=True)
         return dict(data)
+
+    def update_group_status(self, title, flag):
+        if flag == 0: #모집중에서 모집마감
+            self.db.child("group").child(title).update({"status": "모집마감"})
+        if flag == 1: 
+            self.db.child("group").child(title).update({"status": "모집중"})
     
     #좋아요
     def get_heart_byname(self, uid, name):
