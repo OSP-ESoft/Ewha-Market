@@ -245,3 +245,27 @@ body {
     font-size: 1em;
 
 }
+
+/* group 화면에서 사용하는 부분입니다. 겹치는 게 많아서 따로 파일 안 만들었어요 */
+.description {
+    display: flex;
+    width: 200%;
+    padding-top: 10px;
+    padding-left: 10px;
+    border-radius: 20px;
+    background-color: #e9ecef;
+}
+
+.title {
+    display: inline;
+}
+
+.status_btn {
+    display: inline;
+    margin-left: 20px;
+    background-color: #006400;
+    border-color: #006937;
+    color: white;
+    padding: 13px;
+    border-radius: 30px;
+}
