@@ -248,9 +248,9 @@ def view_review():
     end_idx = per_page*(page)
     
     sort_by = request.args.get("sort", "recent")
-    data = DB.get_reviews(sort_by=sort_by)
-    data = dict(list(data.items())[start_idx:end_idx])
-    item_counts = len(data)
+    all_data = DB.get_reviews(sort_by=sort_by)
+    data = dict(list(all_data.items())[start_idx:end_idx])
+    item_counts = len(all_data)
 
     total_count = len(data)
     rows = []  
@@ -266,7 +266,7 @@ def view_review():
         rows = rows,
         limit = per_page,
         page = page,
-        page_count = int((item_counts/per_page)+1),
+        page_count = int((item_counts + per_page - 1)/per_page),
         total = item_counts)
 
 @application.route("/view_detail_review/<title>/")
