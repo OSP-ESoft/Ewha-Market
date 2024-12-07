@@ -349,6 +349,10 @@ def reg_group_submit():
     
 @application.route("/view_group_detail/<title>/")
 def view_group_detail(title):
+    id_ = session.get('id', None)
+    if not id_:
+        flash("로그인하십시오.")
+        return redirect("/loginpage")
     print("###title:",title)
     data = DB.get_group_bytitle(str(title))
     print("####data:",data)
