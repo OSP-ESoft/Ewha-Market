@@ -302,27 +302,29 @@ def view_group():
         group_counts = len(data)
         data = dict(list(data.items())[start_idx:end_idx])
         print(data, type(data))
-        total_count = len(data)
-        for i in range(1):
-            d.append(dict(list(data.items())[i:]))
+        # total_count = len(data)
+        # for i in range(1):
+        #     d.append(dict(list(data.items())[i:]))
 
     
         return render_template(
             "group.html",
-            datas = d,
+            datas = [data],
             limit = per_page,
             page = page,
-            page_count = int((group_counts/per_page)+1),
-            total = group_counts)
+            page_count = int((group_counts + per_page - 1) / per_page),
+            total = group_counts,
+            category = category)
     else:
         return render_template(
             "group.html",
-            # datas = data.items(),
-            rows = 0,
+            datas = [],
+            # rows = 0,
             limit = 0,
             page = page,
             page_count = 1,
-            total = 0)
+            total = 0,
+            category = category)
 
 
 @application.route("/submit_group", methods=['POST'])
