@@ -157,6 +157,15 @@ def reg_reviews_init(name):
 #구매하기 버튼
 @application.route('/get_seller_by_item/<name>/', methods=['GET'])
 def get_seller_by_item(name):
+    id_ = session.get('id', None)
+
+    if not id_:
+        return jsonify({
+            "success": False,
+            "redirect": True,
+            "message": "로그인하십시오."
+        })
+        #return redirect("/loginpage")
 
     seller_id = DB.get_seller_by_item_name(name)
     

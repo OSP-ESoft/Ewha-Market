@@ -74,9 +74,17 @@
         function getSellerInfo(itemName) {
             // 서버로 판매자 정보를 요청
             fetch(`/get_seller_by_item/${itemName}/`)
-                .then(response => response.json())
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('HTTP error! Status: ${response.status}');
+                    }
+                    return response.json();
+                })
                 .then(data => {
-                    if (data.success) {
+                    if (!data.success && data.redirect) {
+                        alert(data.message);
+                        window.location.href = "/loginpage";
+                    } else if (data.success) {
                         // 판매자 정보가 있을 경우 팝업 생성
                         const sellerId = data.seller_id;
                         const email = data.email;
