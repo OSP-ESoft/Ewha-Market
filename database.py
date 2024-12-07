@@ -104,7 +104,7 @@ class DBhandler:
             "seller": user_id,
             "price" : data["price"],
             "addr": data['addr'],
-            "phone": data['phone'],
+            #"phone": data['phone'],    #상품 등록 시 전화번호 기입할 필요 없어서 지움 (bc 회원가입하면서 등록했던 번호 사용)
             "card": data['card'],
             "payment" : data["payment"],
             "condition": data['condition'],
