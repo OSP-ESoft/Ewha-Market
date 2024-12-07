@@ -103,28 +103,26 @@ def view_list():
             value["price"] = format_price(value["price"])
 
     total_count = len(data)
-    # rows = []  # 상품을 row 단위로 나누어 저장할 리스트
+    rows = []  # 상품을 row 단위로 나누어 저장할 리스트
 
     for i in range(row_count):
         if (i == row_count - 1) and (total_count % per_row != 0):  # 마지막 줄
-            locals()['data_{}'.format(i)] = dict(list(data.items())[i*per_row:])
-            # rows.append(dict(list(data.items())[i * per_row:])) 
+            #locals()['data_{}'.format(i)] = dict(list(data.items())[i*per_row:])
+            rows.append(dict(list(data.items())[i * per_row:])) 
         else:
-            locals()['data_{}'.format(i)] = dict(list(data.items())[i*per_row:(i+1)*per_row])
-            # rows.append(dict(list(data.items())[i * per_row:(i + 1) * per_row]))
+            #locals()['data_{}'.format(i)] = dict(list(data.items())[i*per_row:(i+1)*per_row])
+            rows.append(dict(list(data.items())[i * per_row:(i + 1) * per_row]))
 
-    row1=locals()['data_0'].items()
-    row2=locals()['data_1'].items()
+    # row1=locals()['data_0'].items()
+    # row2=locals()['data_1'].items()
 
-    rows = [row1, row2]
+    # rows = [row1, row2]
 
     print(rows, type(rows))
     return render_template(
         "list.html",
         datas = data.items(),
-        row1=locals()['data_0'].items(),
-        row2=locals()['data_1'].items(),
-        rows = rows,
+        rows = [row.items() for row in rows],
         limit = per_page,
         page = page,
         page_count=int(math.ceil(item_counts/per_page)),
