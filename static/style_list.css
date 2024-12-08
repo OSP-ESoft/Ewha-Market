@@ -108,11 +108,26 @@ tr {
 
 /* 상품가격 */
 .product-price{
+    display: inline;
     font-size:13px;
     margin-left: 30px;
     margin-bottom: 30px;
     color:#626262;
 }
+
+/* 상품상태 */
+.status {
+    display: inline;
+    font-size:13px;
+    color: #006937;
+}
+
+.red-status {
+    display: inline;
+    font-size:13px;
+    color: #7e0000;
+}
+
 
 /* 상품등록 버튼 */
 .write_btn {
