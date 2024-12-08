@@ -42,11 +42,16 @@
       <tr>
         {% for key, value in row %}
         <td onclick="location.href='/view_detail/{{key}}/';" style="cursor:pointer;">
-          <img src="static/images/{{value.img_path}}" alt="{{key}}">
+          <img src="static/images/{{value.img_path}}" alt="{{key}}"><br>
           <div class="product-title" data-title="{{key}}">
             {{key}}
-          </div>
+          </div><br>
           <div class="product-price">가격: {{ value.price }}</div>
+          {% if value['status'] == "판매중" %}
+            <div class="status">{{ value.status }}</div>
+          {% elif value['status'] == "판매종료" %} 
+            <div class="red-status">{{ value.status }}</div>
+          {% endif %}
         </td>
         {% endfor %}
       </tr>
