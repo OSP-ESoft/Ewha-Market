@@ -80,8 +80,8 @@ def view_list():
         print(f"Selected category: {category}") #디버깅용
         data = DB.get_items_bycategory(category)
 
-    data = dict(sorted(data.items(), key=lambda x: x[0], reverse=False)) #x[0] == key, x[1]['속성값'] == value
-    print(f"Sorted data : {data}") #디버깅용
+    #data = dict(sorted(data.items(), key=lambda x: x[0], reverse=False)) #x[0] == key, x[1]['속성값'] == value
+    #print(f"Sorted data : {data}") #디버깅용
     item_counts = len(data)
 
     if item_counts<=per_page:
