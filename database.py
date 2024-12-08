@@ -97,7 +97,8 @@ class DBhandler:
     # item
     def get_items(self):
         items = self.db.child("item").get().val()
-        return items
+        data = sorted(items.items(), key=lambda x:x[1]["status"], reverse=True)
+        return dict(data)
     
     def insert_item(self, title, data, user_id, img_path):
         item_info ={
@@ -110,6 +111,7 @@ class DBhandler:
             "condition": data['condition'],
             "description" : data["description"],
             "category" : data['category'],
+            "status" : "판매중",
             "img_path": img_path
         }
         self.db.child("item").child(title).set(item_info)
@@ -143,7 +145,14 @@ class DBhandler:
 
         for k,v in zip(target_key,target_value):
             new_dict[k]=v
-        return new_dict
+        data = sorted(new_dict.items(), key=lambda x:x[1]["status"], reverse=True)
+        return dict(data)
+
+    def update_item_status(self, name, flag):
+        if flag == 0: #판매중에서 판매종료
+            self.db.child("item").child(name).update({"status": "판매종료"})
+        if flag == 1: 
+            self.db.child("item").child(name).update({"status": "판매중"})
     
     #buy-popup
     def get_seller_by_item_name(self, item_name):
@@ -166,7 +175,7 @@ class DBhandler:
     
         return None
 
-    # group
+    #group
     def get_groups(self):
         groups = self.db.child("group").get().val()
         data = sorted(groups.items(), key=lambda x:x[1]["status"], reverse=True)
