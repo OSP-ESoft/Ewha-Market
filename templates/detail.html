@@ -37,7 +37,14 @@
                     <img src="../../static/images/{{data.img_path}}">
                 </div>
                 <div class="item-description">
-                    <h1>{{name}}</h1>
+                    <h1 class="title">{{name}}</h1>
+                    {% if data['seller'] == session['id']%}
+                        {% if data['status'] == "판매중" %}
+                            <button class="status_btn" onclick="location.href='/item_soldout/{{name}}/';" style="cursor:pointer;">판매 종료하기</button>
+                        {% elif data['status'] == "판매종료" %}
+                            <button class="status_btn" onclick="location.href='/item_open/{{name}}/';" style="cursor:pointer;">판매 시작하기</button>
+                        {% endif %}
+                    {% endif %}
                     <p id="item-status"><strong>상품 상태:</strong> <span>{{data.condition}}</span></p>
                     <p><strong>상품 설명:</strong> {{data.description}}<br></p>
                     <p><strong>거래 방식:</strong>
