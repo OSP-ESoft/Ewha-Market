@@ -80,22 +80,18 @@ button:hover {
     cursor: pointer;
 }
 /* 마우스를 올렸을 때 왼쪽부터 채우기 */
-.star:hover,
-.star:hover ~ .star {
-    color: #ccc; /* 이전 동작 제거 */
-}
-
-/* 현재 마우스가 올려진 별까지 채우기 */
 .rating:hover .star {
     color: #ccc; /* 초기화 */
 }
 
 .rating:hover .star:hover,
-.rating:hover .star {
+.rating:hover .star:hover ~ .star {
     color: #006400; /* 초록색 */
 }
 
-.star.selected {
+/* 클릭한 별점 선택 유지 */
+.star.selected,
+.star.selected ~ .star {
     color: #006400;
 }
 
