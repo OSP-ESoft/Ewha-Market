@@ -4,7 +4,7 @@ import sys
 import hashlib
 import math
 from datetime import datetime 
-application = Flask(__name__)
+application = Flask(__name__, static_folder="static")
 application.config["SECRET_KEY"] = "ABCD"
 DB = DBhandler()
 
@@ -115,7 +115,6 @@ def view_list():
 
     # row1=locals()['data_0'].items()
     # row2=locals()['data_1'].items()
-
     # rows = [row1, row2]
 
     print(rows, type(rows))
