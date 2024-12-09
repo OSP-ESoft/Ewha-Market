@@ -41,7 +41,6 @@
       {% for row in rows%}
       <tr>
         {% for key, value in row %}
-        <!-- <td onclick="location.href='/view_detail/{{key}}/';" style="cursor:pointer;"> -->
         <td onclick="location.href='/view_detail/{{key}}/?category={{value.category}}';" style="cursor:pointer;">
           <img src="static/images/{{value.img_path}}" alt="{{key}}"><br>
           <div class="product-title" data-title="{{key}}">
