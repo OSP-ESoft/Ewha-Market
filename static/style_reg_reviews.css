@@ -79,13 +79,16 @@ button:hover {
     color: #ccc;
     cursor: pointer;
 }
+
+
 /* 마우스를 올렸을 때 왼쪽부터 채우기 */
-.rating:hover .star {
+.star:hover,
+.star:hover ~ .star {
     color: #ccc; /* 초기화 */
 }
 
-.rating:hover .star:hover,
-.rating:hover .star:hover ~ .star {
+.star:hover,
+.star ~ .star {
     color: #006400; /* 초록색 */
 }
 
