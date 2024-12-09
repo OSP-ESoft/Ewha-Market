@@ -85,9 +85,14 @@ button:hover {
     color: #ccc; /* 이전 동작 제거 */
 }
 
-.star:hover,
-.star:nth-child(-n+var(--hovered-index)) {
-    color: #006400;
+/* 현재 마우스가 올려진 별까지 채우기 */
+.rating:hover .star {
+    color: #ccc; /* 초기화 */
+}
+
+.rating:hover .star:hover,
+.rating:hover .star:hover ~ .star {
+    color: #006400; /* 초록색 */
 }
 
 .star.selected {
