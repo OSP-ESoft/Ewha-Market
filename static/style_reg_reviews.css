@@ -91,7 +91,7 @@ button:hover {
 }
 
 .rating:hover .star:hover,
-.rating:hover .star:hover ~ .star {
+.rating:hover .star {
     color: #006400; /* 초록색 */
 }
 
