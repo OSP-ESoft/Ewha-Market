@@ -60,36 +60,57 @@
     </form>
 </div>
 <script>
-    // 별점 선택 이벤트
-    document.querySelectorAll('.star').forEach(star => {
-        star.addEventListener('click', function () {
-            let value = this.getAttribute('data-value');
+// 별점 선택 이벤트
+document.addEventListener('DOMContentLoaded', () => {
+    const stars = document.querySelectorAll('.star');
+    const ratingText = document.getElementById('rating-text');
+    let hiddenInput = document.querySelector('input[name="rating"]');
+
+    // 숨겨진 인풋 필드가 없으면 생성
+    if (!hiddenInput) {
+        hiddenInput = document.createElement('input');
+        hiddenInput.type = 'hidden';
+        hiddenInput.name = 'rating';
+        document.querySelector('form').appendChild(hiddenInput);
+    }
+
+    stars.forEach((star, index) => {
+        // 클릭 이벤트
+        star.addEventListener('click', () => {
+            const value = index + 1; // 별점 값은 1부터 시작
+            hiddenInput.value = value; // 숨겨진 필드에 저장
 
             // 모든 별 초기화
-            document.querySelectorAll('.star').forEach(s => s.classList.remove('selected'));
+            stars.forEach(s => s.classList.remove('selected'));
 
-            // 클릭한 별과 그 왼쪽의 별들 활성화
-            let currentStar = this;
-            while (currentStar) {
-                currentStar.classList.add('selected');
-                currentStar = currentStar.previousElementSibling; // 왼쪽 별로 이동
+            // 클릭한 별과 이전 별들에 "selected" 클래스 추가
+            for (let i = 0; i <= index; i++) {
+                stars[i].classList.add('selected');
             }
 
             // 선택한 별점 표시
-            document.getElementById('rating-text').textContent = `선택한 별점: ${value}점`;
-            
-            // 숨겨진 인풋 필드에 저장
-            let existingRatingInput = document.querySelector('input[name="rating"]');
-            if (!existingRatingInput) {
-                let ratingInput = document.createElement('input');
-                ratingInput.type = 'hidden';
-                ratingInput.name = 'rating';
-                this.closest('form').appendChild(ratingInput);
-                existingRatingInput = ratingInput;
-            }
-            existingRatingInput.value = value;
+            ratingText.textContent = `선택한 별점: ${value}점`;
+        });
+
+        // 마우스 호버 이벤트
+        star.addEventListener('mouseover', () => {
+            stars.forEach((s, i) => {
+                s.style.color = i <= index ? '#006400' : '#ccc'; // 초록색/회색 설정
+            });
+        });
+
+        // 마우스 아웃 이벤트
+        star.addEventListener('mouseout', () => {
+            stars.forEach(s => {
+                if (s.classList.contains('selected')) {
+                    s.style.color = '#006400'; // 선택된 별 유지
+                } else {
+                    s.style.color = '#ccc'; // 선택되지 않은 별 초기화
+                }
+            });
         });
     });
+});
 
     // 파일 이름 표시 이벤트
     function showFileName() {
