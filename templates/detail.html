@@ -38,15 +38,17 @@
                 </div>
                 <div class="item-description">
                     <h1 class="title">{{name}}</h1>
-                    {% if data['seller'] == session['id']%}
-                        {% if data['status'] == "판매중" %}
-                            <button class="status_btn" onclick="location.href='/item_soldout/{{name}}/';" style="cursor:pointer;">판매 종료하기</button>
-                        {% elif data['status'] == "판매종료" %}
-                            <button class="status_btn" onclick="location.href='/item_open/{{name}}/';" style="cursor:pointer;">판매 시작하기</button>
-                        {% endif %}
+                    <!-- {% if data['seller'] == session['id']%}
+                    {% if data['status'] == "판매중" %}
+                    <button class="status_btn" onclick="location.href='/item_soldout/{{name}}/';"
+                        style="cursor:pointer;">판매 종료하기</button>
+                    {% elif data['status'] == "판매종료" %}
+                    <button class="status_btn" onclick="location.href='/item_open/{{name}}/';"
+                        style="cursor:pointer;">판매 시작하기</button>
                     {% endif %}
+                    {% endif %} -->
                     <p id="item-status"><strong>상품 상태:</strong> <span>{{data.condition}}</span></p>
-                    <p><strong>상품 설명:</strong> {{data.description}}<br></p>
+                    <p id="item-des"><strong>상품 설명:</strong> {{data.description}}<br></p>
                     <p><strong>거래 방식:</strong>
                         {% if data['card'] == "delivery" %}
                         택배
@@ -67,11 +69,23 @@
                         {% endif %}
                     </p>
                     <p><strong>가격:</strong>{{data.price}}</p>
-                    <button onclick="getSellerInfo('{{name}}');" class="buy_btn">구매하기</button>
-                    <button onclick="location.href='/reg_reviews_init/{{name}}/';" class="reg_review_btn">
-                        리뷰 쓰기
-                    </button>
-                    <i class="fa fa-heart" id="heart"></i>
+                    <div id="btns">
+                        <button onclick="getSellerInfo('{{name}}');" class="buy_btn">구매하기</button>
+                        <button onclick="location.href='/reg_reviews_init/{{name}}/';" class="reg_review_btn">
+                            리뷰 쓰기
+                        </button>
+                        <i class="fa fa-heart" id="heart"></i>
+                    </div>
+                    <!-- <br> -->
+                    {% if data['seller'] == session['id']%}
+                    {% if data['status'] == "판매중" %}
+                    <button id="status_btn" class="sell_stop" onclick="location.href='/item_soldout/{{name}}/';"
+                        style="cursor:pointer;">판매 종료하기</button>
+                    {% elif data['status'] == "판매종료" %}
+                    <button id="status_btn" class="sell_start" onclick="location.href='/item_open/{{name}}/';"
+                        style="cursor:pointer;">판매 시작하기</button>
+                    {% endif %}
+                    {% endif %}
                 </div>
             </div>
         </section>

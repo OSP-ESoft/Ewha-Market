@@ -73,6 +73,7 @@ body {
     margin-left: 30px;
 }
 
+
 .back-link {
 
     margin-bottom: 25px;
@@ -91,6 +92,7 @@ body {
     text-decoration: underline;
 }
 
+
 .item-info {
     display: flex;
     gap: 20px;
@@ -102,43 +104,47 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.item-description {
-    max-width: 500px;
-}
-
-.item-description h1 {
+/* 상품 제목 */
+.title {
+    display: inline;
     font-size: 1.8em;
     margin-bottom: 10px;
 }
 
+/* 상품 설명 */
+.item-description {
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+}
 .item-description p {
-    margin: 10px 0;
+    margin-top: 10px;
+}
+#item-des {
+    line-height: 1.7;
 }
 
+/* 상품 상태 글씨 */
 #item-status span {
     font-weight: bold;
 }
-
 #item-status span.green {
     color: #28a745;
 }
-
 #item-status span.lightGreen {
     color: #87a728;
 }
-
 #item-status span.yellow {
     color: #c1c122;
 }
-
 #item-status span.orange {
     color: #bb5a1e;
 }
-
 #item-status span.red {
     color: #a73928;
 }
 
+/* 구매하기 버튼 */
 .buy_btn {
     background-color: #006400;
     color: white;
@@ -153,13 +159,13 @@ body {
     min-height: 15px;
     font-size: 1em;
 }
-
 .buy_btn:hover {
     background-color: #004d00;
 
 }
 
 
+/* 구매하기 팝업 */
 .popup {
     position: fixed;
     top: 0;
@@ -172,7 +178,6 @@ body {
     align-items: center;
     z-index: 1000;
 }
-
 .popup-content {
     position: relative;
     background-color: #fff;
@@ -182,20 +187,6 @@ body {
     height: 170px;
     max-width: 80%;
 }
-
-.close-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 20px;
-    color: #333;
-    cursor: pointer;
-}
-
-.close-btn:hover {
-    color: red;
-}
-
 .popup-content h2 {
     padding: 8px;
     text-align: center;
@@ -207,7 +198,6 @@ body {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
 }
-
 .popup-content p{
     padding:1px;
     text-align: center;
@@ -217,7 +207,6 @@ body {
     color:#000000;
 
 }
-
 .popup-content .info {
 
     padding: 30px 0 10px 0;
@@ -225,8 +214,19 @@ body {
     font-weight: 500;
     color: #4e4e4e;
 }
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    color: #333;
+    cursor: pointer;
+}
+.close-btn:hover {
+    color: red;
+}
 
-
+/* 리뷰쓰기 버튼 */
 .reg_review_btn {
 
     background-color: white;
@@ -245,6 +245,21 @@ body {
 
 }
 
+
+/* 버튼 정렬 */
+#btns {
+    margin-top:15px;
+    margin-bottom:15px;
+    display: flex !important; 
+    justify-content: flex-start !important;
+    gap: 10px !important;
+}
+
+
+
+
+
+
 /* group 화면에서 사용하는 부분입니다. 겹치는 게 많아서 따로 파일 안 만들었어요 */
 .description {
     display: flex;
@@ -255,16 +270,31 @@ body {
     background-color: #e9ecef;
 }
 
-.title {
-    display: inline;
+#status_btn {
+    /* float:right; */
+    align-self: flex-start;
+    background-color: #ffffff;
+    /* border: 1.5px solid #004d00; */
+    border:none;
+    /* width: 122px;
+    height: 35px; */
+    font-size: 16px;
+    border-radius: 7px;
 }
 
-.status_btn {
-    display: inline;
-    margin-left: 20px;
-    background-color: #006400;
-    border-color: #006937;
-    color: white;
-    padding: 13px;
-    border-radius: 30px;
+.sell_stop{
+    color:#004d00;
+}
+
+.sell_stop:hover {
+    color:#7E0000;
+    text-decoration-line: underline;
+}
+
+.sell_start{
+    color:#7E0000;
+}
+.sell_start:hover{
+    color:#004d00;
+    text-decoration: underline;
 }
