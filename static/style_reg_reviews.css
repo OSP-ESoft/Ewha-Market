@@ -80,23 +80,21 @@ button:hover {
     cursor: pointer;
 }
 
-
-/* 마우스를 올렸을 때 왼쪽부터 채우기 */
+/* 마우스를 올렸을 때 선택한 별과 이전 별 초록색으로 변경 */
 .star:hover,
 .star:hover ~ .star {
-    color: #ccc; /* 초기화 */
-}
-
-.star:hover {
     color: #006400; /* 초록색 */
 }
 
-.star.selected {
-    color: #006400; /* 클릭한 별 유지 */
+/* 클릭한 별과 이전 별을 초록색으로 유지 */
+.star.selected,
+.star.selected ~ .star {
+    color: #006400; /* 초록색 */
 }
 
+/* 선택된 별 이후의 별들은 항상 회색으로 설정 */
 .star.selected ~ .star {
-    color: #ccc; /* 오른쪽 별은 초기화 */
+    color: #ccc; /* 회색 */
 }
 
 .file-buttons {
