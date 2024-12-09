@@ -77,7 +77,7 @@ def view_list():
     if not category:
         data = DB.get_items() #read table
     else:
-        print(f"Selected category: {category}") #디버깅용
+        # print(f"Selected category: {category}") #디버깅용
         data = DB.get_items_bycategory(category)
 
     #data = dict(sorted(data.items(), key=lambda x: x[0], reverse=False)) #x[0] == key, x[1]['속성값'] == value
@@ -133,9 +133,10 @@ def view_list():
 @application.route("/view_detail/<name>/")
 def view_detail(name):
     print("###name:",name)
+    category = request.args.get("category", None)
     data = DB.get_item_byname(str(name))
     print("####data:",data)
-    return render_template("detail.html", name=name, data=data)
+    return render_template("detail.html", name=name, data=data, category=category)
 
 @application.route("/submit_item", methods=['POST'])
 def reg_item_submit():
@@ -302,7 +303,7 @@ def view_group():
     if not category:
         data = DB.get_groups() #read table
     else:
-        print(f"Selected category: {category}") #디버깅용
+        # print(f"Selected category: {category}") #디버깅용
         data = DB.get_groups_bycategory(category)
     
     d = []

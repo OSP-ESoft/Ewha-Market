@@ -19,38 +19,39 @@
   </div>
   <!-- 네비게이션 바 아래 상품 분류 필터부터 구현 -->
   <div class="category_btn">
-    <button class="daily_products" data-filter="daily_products"
+    <button class="daily_products {{ 'active' if category == 'daily_products' else '' }}" data-filter="daily_products"
       onclick="location.href='{{url_for('view_list', page=i, category='daily_products')}}';">
       생활용품
     </button>
-    <button class="books" data-filter="books"
+    <button class="books {{ 'active' if category == 'books' else '' }}" data-filter="books"
       onclick="location.href='{{ url_for('view_list', category='books', page=i) }}';">
       책
     </button>
-    <button class="ewha_goods" data-filter="ewha_goods"
+    <button class="ewha_goods {{ 'active' if category == 'ewha_goods' else '' }}" data-filter="ewha_goods"
       onclick="location.href='{{ url_for('view_list', category='ewha_goods', page=i) }}';">
       이화 굿즈
     </button>
+
   </div>
 
 
   <div class="product-container" id="products">
     {% if total > 0 %}
-    <!-- <p>상품 총 {{total}}개</p>  -->
     <table>
       {% for row in rows%}
       <tr>
         {% for key, value in row %}
-        <td onclick="location.href='/view_detail/{{key}}/';" style="cursor:pointer;">
+        <!-- <td onclick="location.href='/view_detail/{{key}}/';" style="cursor:pointer;"> -->
+        <td onclick="location.href='/view_detail/{{key}}/?category={{value.category}}';" style="cursor:pointer;">
           <img src="static/images/{{value.img_path}}" alt="{{key}}"><br>
           <div class="product-title" data-title="{{key}}">
             {{key}}
           </div><br>
           <div class="product-price">가격: {{ value.price }}</div>
           {% if value['status'] == "판매중" %}
-            <div class="status">{{ value.status }}</div>
-          {% elif value['status'] == "판매종료" %} 
-            <div class="red-status">{{ value.status }}</div>
+          <div class="status">{{ value.status }}</div>
+          {% elif value['status'] == "판매종료" %}
+          <div class="red-status">{{ value.status }}</div>
           {% endif %}
         </td>
         {% endfor %}
@@ -71,28 +72,6 @@
     {% endfor %}
 
   </div>
-
-
-
-
-  <script>
-    // 버튼 클릭 시 active 클래스 추가/삭제
-    document.addEventListener("DOMContentLoaded", function () {
-      const buttons = document.querySelectorAll(".category_btn button");
-
-      buttons.forEach(button => {
-        button.addEventListener("click", function () {
-          if (this.classList.contains("active")) {
-            this.classList.remove("active");
-          }
-          else {
-            buttons.forEach(btn => btn.classList.remove("active"));
-            this.classList.add("active");
-          }
-        });
-      });
-    });
-  </script>
 
 </body>
 {% endblock section %}
