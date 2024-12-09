@@ -88,8 +88,8 @@ button:hover {
 }
 
 .star:hover,
-.star ~ .star {
-    color: #006400; /* 초록색 */
+.star:nth-child(-n+var(--hovered-index)) {
+  color: #006400; /* 초록색 */
 }
 
 /* 클릭한 별점 선택 유지 */
